@@ -2,6 +2,6 @@ package com.happyprog.tdgotchi.controller;
 
 public interface TestSubscriber {
 
-	void subscribe(TestObserver controller);
+	void subscribe(TestObserver observer);
 
 }

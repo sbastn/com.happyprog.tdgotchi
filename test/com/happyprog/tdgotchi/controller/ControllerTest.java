@@ -20,7 +20,7 @@ public class ControllerTest {
 	}
 
 	@Test
-	public void subscribesToJUnitEvents() throws Exception {
+	public void subscribesToTestEvents() throws Exception {
 		verify(subscriber).subscribe(controller);
 	}
 
