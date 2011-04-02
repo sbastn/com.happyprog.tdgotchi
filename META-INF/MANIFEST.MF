@@ -7,6 +7,7 @@ Bundle-Activator: com.happyprog.tdgotchi.Activator
 Bundle-Vendor: HAPPYPROG
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.junit
+ org.junit,
+ org.eclipse.jdt.junit.core;bundle-version="3.6.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
