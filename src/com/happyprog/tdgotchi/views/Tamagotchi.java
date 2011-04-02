@@ -1,4 +1,4 @@
-package com.happyprog.tdgotchi.controller;
+package com.happyprog.tdgotchi.views;
 
 public interface Tamagotchi {
 

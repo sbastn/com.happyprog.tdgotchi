@@ -1,4 +1,4 @@
-package com.happyprog.tdgotchi.controller;
+package com.happyprog.tdgotchi.subscriber;
 
 public interface TestObserver {
 	void onPassingTest();

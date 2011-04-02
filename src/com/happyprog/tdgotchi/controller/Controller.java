@@ -1,5 +1,9 @@
 package com.happyprog.tdgotchi.controller;
 
+import com.happyprog.tdgotchi.subscriber.TestObserver;
+import com.happyprog.tdgotchi.subscriber.TestSubscriber;
+import com.happyprog.tdgotchi.views.Tamagotchi;
+
 public class Controller implements TestObserver {
 
 	private final TestSubscriber subscriber;

@@ -1,9 +1,13 @@
-package com.happyprog.tdgotchi.controller;
+package com.happyprog.tdgotchi.subscriber;
 
 import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
+import com.happyprog.tdgotchi.subscriber.TestObserver;
+
 
 public class JUnitTestSubscriberTest {
 
