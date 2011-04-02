@@ -20,4 +20,9 @@ public class Controller implements TestObserver {
 	public void onPassingTest() {
 		tamagotchi.beHappy();
 	}
+
+	@Override
+	public void onFailingTest() {
+		tamagotchi.beUpset();
+	}
 }

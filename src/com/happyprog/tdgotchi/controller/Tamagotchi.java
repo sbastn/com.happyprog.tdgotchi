@@ -4,4 +4,6 @@ public interface Tamagotchi {
 
 	void beHappy();
 
+	void beUpset();
+
 }
