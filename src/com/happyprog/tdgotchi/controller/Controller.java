@@ -1,10 +1,12 @@
 package com.happyprog.tdgotchi.controller;
 
-public class Controller {
+public class Controller implements TestObserver {
 
 	private final TestSubscriber subscriber;
+	private final Tamagotchi tamagotchi;
 
-	public Controller(TestSubscriber subscriber) {
+	public Controller(Tamagotchi tamagotchi, TestSubscriber subscriber) {
+		this.tamagotchi = tamagotchi;
 		this.subscriber = subscriber;
 
 		subscribeToJUnitEvents();
@@ -14,4 +16,8 @@ public class Controller {
 		subscriber.subscribe(this);
 	}
 
+	@Override
+	public void onPassingTest() {
+		tamagotchi.beHappy();
+	}
 }
