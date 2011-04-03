@@ -4,10 +4,10 @@ import org.eclipse.swt.graphics.Image;
 
 public interface Level {
 
-	Image getNormalMood();
+	Image[] getNormalMood();
 
-	Image getHappyMood();
+	Image[] getHappyMood();
 
-	Image getUpsetMood();
+	Image[] getUpsetMood();
 
 }

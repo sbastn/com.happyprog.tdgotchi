@@ -11,9 +11,13 @@ import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
 
 public class MainView extends ViewPart implements View {
 
+	private static final int ONE_SECOND = 1000;
+	private Tamagotchi tamagotchi;
+
 	@Override
 	public void createPartControl(Composite parent) {
-		new Controller(new FastViewTamagotchi(this, new LevelOne()), new JUnitTestSubscriber());
+		tamagotchi = new FastViewTamagotchi(this, new LevelOne());
+		new Controller(tamagotchi, new JUnitTestSubscriber());
 	}
 
 	@Override
@@ -23,11 +27,12 @@ public class MainView extends ViewPart implements View {
 
 	@Override
 	public void setImage(final Image image) {
-		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+		PlatformUI.getWorkbench().getDisplay().timerExec(ONE_SECOND, new Runnable() {
 
 			@Override
 			public void run() {
 				setTitleImage(image);
+				tamagotchi.onImageSetCallback();
 			}
 		});
 	}

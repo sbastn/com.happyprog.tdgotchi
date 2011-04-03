@@ -6,4 +6,6 @@ public interface Tamagotchi {
 
 	void beUpset();
 
+	void onImageSetCallback();
+
 }

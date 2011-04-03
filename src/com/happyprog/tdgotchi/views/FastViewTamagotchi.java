@@ -17,27 +17,42 @@ public class FastViewTamagotchi implements Tamagotchi {
 		this.level = level;
 
 		moodStack = new Stack<Image>();
-		moodStack.push(level.getNormalMood());
+		pushToStack(level.getNormalMood());
 
 		updateMood();
 	}
 
 	private void updateMood() {
+		if (moodStack.empty()) {
+			pushToStack(level.getNormalMood());
+		}
+
 		view.setImage(moodStack.pop());
 	}
 
 	@Override
 	public void beHappy() {
-		moodStack.push(level.getHappyMood());
+		pushToStack(level.getHappyMood());
 
 		updateMood();
 	}
 
 	@Override
 	public void beUpset() {
-		moodStack.push(level.getUpsetMood());
+		pushToStack(level.getUpsetMood());
 
 		updateMood();
+	}
+
+	@Override
+	public void onImageSetCallback() {
+		updateMood();
+	}
+
+	private void pushToStack(Image... images) {
+		for (Image image : images) {
+			moodStack.push(image);
+		}
 	}
 
 }
