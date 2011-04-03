@@ -6,13 +6,14 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import com.happyprog.tdgotchi.controller.Controller;
+import com.happyprog.tdgotchi.level.LevelOne;
 import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
 
 public class MainView extends ViewPart implements View {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		new Controller(new FastViewTamagotchi(this, new TamagotchiImageRegistry()), new JUnitTestSubscriber());
+		new Controller(new FastViewTamagotchi(this, new LevelOne()), new JUnitTestSubscriber());
 	}
 
 	@Override

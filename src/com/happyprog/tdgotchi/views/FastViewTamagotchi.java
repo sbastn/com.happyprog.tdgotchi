@@ -1,25 +1,43 @@
 package com.happyprog.tdgotchi.views;
 
+import java.util.Stack;
+
+import org.eclipse.swt.graphics.Image;
+
+import com.happyprog.tdgotchi.level.Level;
+
 public class FastViewTamagotchi implements Tamagotchi {
 
-	public static final String HAPPY = "icons/level1-happy1.png";
-	public static final String UPSET = "icons/level1-upset1.png";
 	private final View view;
-	private final ImageRegistry imageRegistry;
+	private final Level level;
+	private Stack<Image> moodStack;
 
-	public FastViewTamagotchi(View view, ImageRegistry imageRegistry) {
+	public FastViewTamagotchi(View view, Level level) {
 		this.view = view;
-		this.imageRegistry = imageRegistry;
+		this.level = level;
+
+		moodStack = new Stack<Image>();
+		moodStack.push(level.getNormalMood());
+
+		updateMood();
+	}
+
+	private void updateMood() {
+		view.setImage(moodStack.pop());
 	}
 
 	@Override
 	public void beHappy() {
-		view.setImage(imageRegistry.get(HAPPY));
+		moodStack.push(level.getHappyMood());
+
+		updateMood();
 	}
 
 	@Override
 	public void beUpset() {
-		view.setImage(imageRegistry.get(UPSET));
+		moodStack.push(level.getUpsetMood());
+
+		updateMood();
 	}
 
 }
