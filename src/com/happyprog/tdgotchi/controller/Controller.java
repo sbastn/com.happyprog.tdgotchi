@@ -8,6 +8,11 @@ public class Controller implements TestObserver {
 
 	private final TestSubscriber subscriber;
 	private final Tamagotchi tamagotchi;
+	private TestRun previousTestRun;
+
+	private enum TestRun {
+		PASS, FAIL
+	}
 
 	public Controller(Tamagotchi tamagotchi, TestSubscriber subscriber) {
 		this.tamagotchi = tamagotchi;
@@ -22,11 +27,17 @@ public class Controller implements TestObserver {
 
 	@Override
 	public void onPassingTest() {
-		tamagotchi.beHappy();
+		if (TestRun.FAIL.equals(previousTestRun)) {
+			tamagotchi.beHappy();
+		}
+		previousTestRun = TestRun.PASS;
 	}
 
 	@Override
 	public void onFailingTest() {
-		tamagotchi.beUpset();
+		if (TestRun.FAIL.equals(previousTestRun)) {
+			tamagotchi.beUpset();
+		}
+		previousTestRun = TestRun.FAIL;
 	}
 }

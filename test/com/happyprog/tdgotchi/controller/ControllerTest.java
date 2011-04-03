@@ -8,7 +8,6 @@ import org.junit.Test;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 
-
 public class ControllerTest {
 
 	private TestSubscriber subscriber;
@@ -29,16 +28,34 @@ public class ControllerTest {
 	}
 
 	@Test
-	public void onPassingTest_tamagotchiIsHappy() throws Exception {
+	public void onRedToGreen_tamagotchiIsHappy() throws Exception {
+		controller.onFailingTest();
 		controller.onPassingTest();
 
 		verify(tamagotchi).beHappy();
 	}
 
 	@Test
-	public void onFailingTest_tamagotchiIsUpset() throws Exception {
+	public void onDoubleRed_tamagotchiIsUpset() throws Exception {
+		controller.onFailingTest();
 		controller.onFailingTest();
 
 		verify(tamagotchi).beUpset();
+	}
+
+	@Test
+	public void onDoubleGreen_tamagotchiDoesNotChangeMood() throws Exception {
+		controller.onPassingTest();
+		controller.onPassingTest();
+
+		verifyZeroInteractions(tamagotchi);
+	}
+
+	@Test
+	public void onGreenToRed_tamagotchiDoesNotChangeMood() throws Exception {
+		controller.onPassingTest();
+		controller.onFailingTest();
+
+		verifyZeroInteractions(tamagotchi);
 	}
 }
