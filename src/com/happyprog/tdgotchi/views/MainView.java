@@ -8,14 +8,12 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import com.happyprog.tdgotchi.controller.Controller;
-import com.happyprog.tdgotchi.level.LevelOne;
-import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
 
 public class MainView extends ViewPart implements View {
 
 	private static final int ONE_SECOND = 1000;
-	private Tamagotchi tamagotchi;
 	private Label scoreLabel;
+	private Controller controller;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -24,8 +22,7 @@ public class MainView extends ViewPart implements View {
 	}
 
 	private void createController() {
-		tamagotchi = new FastViewTamagotchi(this, new LevelOne());
-		new Controller(this, tamagotchi, new JUnitTestSubscriber());
+		controller = new Controller(this);
 	}
 
 	private void createScoreLabel(Composite parent) {
@@ -40,7 +37,7 @@ public class MainView extends ViewPart implements View {
 			@Override
 			public void run() {
 				setTitleImage(image);
-				tamagotchi.onImageSetCallback();
+				controller.onImageSetCallback();
 			}
 		});
 	}

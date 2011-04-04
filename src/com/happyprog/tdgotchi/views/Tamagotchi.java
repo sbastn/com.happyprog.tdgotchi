@@ -12,4 +12,6 @@ public interface Tamagotchi {
 
 	void changeLevel(Level level);
 
+	void addObserver(TamagotchiObserver observer);
+
 }

@@ -1,13 +1,18 @@
 package com.happyprog.tdgotchi.controller;
 
+import org.eclipse.swt.graphics.Image;
+
 import com.happyprog.tdgotchi.level.LevelOne;
 import com.happyprog.tdgotchi.level.ZombieLevel;
+import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
 import com.happyprog.tdgotchi.subscriber.TestObserver;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
+import com.happyprog.tdgotchi.views.FastViewTamagotchi;
 import com.happyprog.tdgotchi.views.Tamagotchi;
+import com.happyprog.tdgotchi.views.TamagotchiObserver;
 import com.happyprog.tdgotchi.views.View;
 
-public class Controller implements TestObserver {
+public class Controller implements TestObserver, TamagotchiObserver {
 
 	private final View view;
 	private final TestSubscriber subscriber;
@@ -20,16 +25,17 @@ public class Controller implements TestObserver {
 		PASS, FAIL
 	}
 
+	public Controller(View view) {
+		this(view, new FastViewTamagotchi(new LevelOne()), new JUnitTestSubscriber());
+	}
+
 	public Controller(View view, Tamagotchi tamagotchi, TestSubscriber subscriber) {
 		this.view = view;
 		this.tamagotchi = tamagotchi;
 		this.subscriber = subscriber;
 
 		subscribeToJUnitEvents();
-	}
-
-	private void subscribeToJUnitEvents() {
-		subscriber.subscribe(this);
+		subscribeToTamagotchiEvents(tamagotchi);
 	}
 
 	@Override
@@ -50,6 +56,11 @@ public class Controller implements TestObserver {
 		previousTestRun = TestRun.FAIL;
 	}
 
+	@Override
+	public void updateMood(Image image) {
+		view.setImage(image);
+	}
+
 	private void updateScoreWith(int points) {
 		score += points;
 
@@ -67,5 +78,17 @@ public class Controller implements TestObserver {
 			tamagotchi.changeLevel(new LevelOne());
 			return;
 		}
+	}
+
+	private void subscribeToTamagotchiEvents(Tamagotchi tamagotchi) {
+		tamagotchi.addObserver(this);
+	}
+
+	private void subscribeToJUnitEvents() {
+		subscriber.subscribe(this);
+	}
+
+	public void onImageSetCallback() {
+		tamagotchi.onImageSetCallback();
 	}
 }

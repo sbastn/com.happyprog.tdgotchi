@@ -54,7 +54,8 @@ public class ControllerTest {
 		controller.onPassingTest();
 		controller.onPassingTest();
 
-		verifyZeroInteractions(tamagotchi);
+		verify(tamagotchi, never()).beHappy();
+		verify(tamagotchi, never()).beUpset();
 	}
 
 	@Test
@@ -62,7 +63,8 @@ public class ControllerTest {
 		controller.onPassingTest();
 		controller.onFailingTest();
 
-		verifyZeroInteractions(tamagotchi);
+		verify(tamagotchi, never()).beHappy();
+		verify(tamagotchi, never()).beUpset();
 	}
 
 	@Test
@@ -87,5 +89,19 @@ public class ControllerTest {
 		controller.onFailingTest();
 
 		verify(view).updateScore(-5);
+	}
+
+	@Test
+	public void onUpdateMood_viewIsUpdated() throws Exception {
+		controller.updateMood(null);
+
+		verify(view).setImage(null);
+	}
+
+	@Test
+	public void onSetImageCallback_tamagotchiIsNotified() throws Exception {
+		controller.onImageSetCallback();
+
+		verify(tamagotchi).onImageSetCallback();
 	}
 }

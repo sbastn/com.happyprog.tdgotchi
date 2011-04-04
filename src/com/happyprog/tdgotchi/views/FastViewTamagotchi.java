@@ -8,26 +8,15 @@ import com.happyprog.tdgotchi.level.Level;
 
 public class FastViewTamagotchi implements Tamagotchi {
 
-	private final View view;
+	private TamagotchiObserver observer;
 	private Level level;
 	private Stack<Image> moodStack;
 
-	public FastViewTamagotchi(View view, Level level) {
-		this.view = view;
+	public FastViewTamagotchi(Level level) {
 		this.level = level;
 
 		moodStack = new Stack<Image>();
 		pushToStack(level.getNormalMood());
-
-		updateMood();
-	}
-
-	private void updateMood() {
-		if (moodStack.empty()) {
-			pushToStack(level.getNormalMood());
-		}
-
-		view.setImage(moodStack.pop());
 	}
 
 	@Override
@@ -45,15 +34,30 @@ public class FastViewTamagotchi implements Tamagotchi {
 		updateMood();
 	}
 
+	@Override
+	public void changeLevel(Level level) {
+		this.level = level;
+	}
+
+	@Override
+	public void addObserver(TamagotchiObserver observer) {
+		this.observer = observer;
+
+		updateMood();
+	}
+
+	private void updateMood() {
+		if (moodStack.empty()) {
+			pushToStack(level.getNormalMood());
+		}
+
+		observer.updateMood(moodStack.pop());
+	}
+
 	private void pushToStack(Image... images) {
 		for (Image image : images) {
 			moodStack.push(image);
 		}
-	}
-
-	@Override
-	public void changeLevel(Level level) {
-		this.level = level;
 	}
 
 }
