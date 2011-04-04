@@ -1,4 +1,4 @@
-package com.happyprog.tdgotchi.controller;
+package com.happyprog.tdgotchi.scoreboard;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -9,10 +9,9 @@ import com.happyprog.tdgotchi.subscriber.TestObserver;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.FastViewTamagotchi;
 import com.happyprog.tdgotchi.views.Tamagotchi;
-import com.happyprog.tdgotchi.views.TamagotchiObserver;
 import com.happyprog.tdgotchi.views.View;
 
-public class Controller implements TestObserver, TamagotchiObserver {
+public class Scoreboard implements TestObserver, TamagotchiObserver {
 
 	private final View view;
 	private final TestSubscriber subscriber;
@@ -25,11 +24,11 @@ public class Controller implements TestObserver, TamagotchiObserver {
 		PASS, FAIL
 	}
 
-	public Controller(View view) {
+	public Scoreboard(View view) {
 		this(view, new FastViewTamagotchi(new LevelOne()), new JUnitTestSubscriber());
 	}
 
-	public Controller(View view, Tamagotchi tamagotchi, TestSubscriber subscriber) {
+	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber subscriber) {
 		this.view = view;
 		this.tamagotchi = tamagotchi;
 		this.subscriber = subscriber;

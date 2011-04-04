@@ -7,22 +7,22 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-import com.happyprog.tdgotchi.controller.Controller;
+import com.happyprog.tdgotchi.scoreboard.Scoreboard;
 
 public class MainView extends ViewPart implements View {
 
 	private static final int ONE_SECOND = 1000;
 	private Label scoreLabel;
-	private Controller controller;
+	private Scoreboard scoreboard;
 
 	@Override
 	public void createPartControl(Composite parent) {
-		createController();
+		createScoreboard();
 		createScoreLabel(parent);
 	}
 
-	private void createController() {
-		controller = new Controller(this);
+	private void createScoreboard() {
+		scoreboard = new Scoreboard(this);
 	}
 
 	private void createScoreLabel(Composite parent) {
@@ -37,7 +37,7 @@ public class MainView extends ViewPart implements View {
 			@Override
 			public void run() {
 				setTitleImage(image);
-				controller.onImageSetCallback();
+				scoreboard.onImageSetCallback();
 			}
 		});
 	}

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.happyprog.tdgotchi.level.Level;
+import com.happyprog.tdgotchi.scoreboard.TamagotchiObserver;
 
 public class FastViewTamagotchiTest {
 

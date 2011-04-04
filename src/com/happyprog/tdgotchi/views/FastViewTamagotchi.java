@@ -5,6 +5,7 @@ import java.util.Stack;
 import org.eclipse.swt.graphics.Image;
 
 import com.happyprog.tdgotchi.level.Level;
+import com.happyprog.tdgotchi.scoreboard.TamagotchiObserver;
 
 public class FastViewTamagotchi implements Tamagotchi {
 

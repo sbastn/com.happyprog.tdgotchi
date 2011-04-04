@@ -1,6 +1,7 @@
 package com.happyprog.tdgotchi.views;
 
 import com.happyprog.tdgotchi.level.Level;
+import com.happyprog.tdgotchi.scoreboard.TamagotchiObserver;
 
 public interface Tamagotchi {
 

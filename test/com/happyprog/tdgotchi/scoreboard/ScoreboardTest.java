@@ -1,4 +1,4 @@
-package com.happyprog.tdgotchi.controller;
+package com.happyprog.tdgotchi.scoreboard;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
@@ -8,51 +8,52 @@ import org.junit.Test;
 
 import com.happyprog.tdgotchi.level.LevelOne;
 import com.happyprog.tdgotchi.level.ZombieLevel;
+import com.happyprog.tdgotchi.scoreboard.Scoreboard;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 import com.happyprog.tdgotchi.views.View;
 
-public class ControllerTest {
+public class ScoreboardTest {
 
 	private TestSubscriber subscriber;
 	private Tamagotchi tamagotchi;
 	private View view;
 
-	private Controller controller;
+	private Scoreboard scoreboard;
 
 	@Before
 	public void before() {
 		subscriber = mock(TestSubscriber.class);
 		tamagotchi = mock(Tamagotchi.class);
 		view = mock(View.class);
-		controller = new Controller(view, tamagotchi, subscriber);
+		scoreboard = new Scoreboard(view, tamagotchi, subscriber);
 	}
 
 	@Test
 	public void subscribesToTestEvents() throws Exception {
-		verify(subscriber).subscribe(controller);
+		verify(subscriber).subscribe(scoreboard);
 	}
 
 	@Test
 	public void onRedToGreen_tamagotchiIsHappy() throws Exception {
-		controller.onFailingTest();
-		controller.onPassingTest();
+		scoreboard.onFailingTest();
+		scoreboard.onPassingTest();
 
 		verify(tamagotchi).beHappy();
 	}
 
 	@Test
 	public void onDoubleRed_tamagotchiIsUpset() throws Exception {
-		controller.onFailingTest();
-		controller.onFailingTest();
+		scoreboard.onFailingTest();
+		scoreboard.onFailingTest();
 
 		verify(tamagotchi).beUpset();
 	}
 
 	@Test
 	public void onDoubleGreen_tamagotchiDoesNotChangeMood() throws Exception {
-		controller.onPassingTest();
-		controller.onPassingTest();
+		scoreboard.onPassingTest();
+		scoreboard.onPassingTest();
 
 		verify(tamagotchi, never()).beHappy();
 		verify(tamagotchi, never()).beUpset();
@@ -60,8 +61,8 @@ public class ControllerTest {
 
 	@Test
 	public void onGreenToRed_tamagotchiDoesNotChangeMood() throws Exception {
-		controller.onPassingTest();
-		controller.onFailingTest();
+		scoreboard.onPassingTest();
+		scoreboard.onFailingTest();
 
 		verify(tamagotchi, never()).beHappy();
 		verify(tamagotchi, never()).beUpset();
@@ -69,38 +70,38 @@ public class ControllerTest {
 
 	@Test
 	public void ifScoreLessThanZero_tamagotchiLevelIsZombie() throws Exception {
-		controller.onFailingTest();
-		controller.onFailingTest();
+		scoreboard.onFailingTest();
+		scoreboard.onFailingTest();
 
 		verify(tamagotchi).changeLevel(isA(ZombieLevel.class));
 	}
 
 	@Test
 	public void ifScoreEqualsZero_tamagotchiLevelIsOne() throws Exception {
-		controller.onFailingTest();
-		controller.onPassingTest();
+		scoreboard.onFailingTest();
+		scoreboard.onPassingTest();
 
 		verify(tamagotchi).changeLevel(isA(LevelOne.class));
 	}
 
 	@Test
 	public void whenScoreChanges_viewIsUpdated() throws Exception {
-		controller.onFailingTest();
-		controller.onFailingTest();
+		scoreboard.onFailingTest();
+		scoreboard.onFailingTest();
 
 		verify(view).updateScore(-5);
 	}
 
 	@Test
 	public void onUpdateMood_viewIsUpdated() throws Exception {
-		controller.updateMood(null);
+		scoreboard.updateMood(null);
 
 		verify(view).setImage(null);
 	}
 
 	@Test
 	public void onSetImageCallback_tamagotchiIsNotified() throws Exception {
-		controller.onImageSetCallback();
+		scoreboard.onImageSetCallback();
 
 		verify(tamagotchi).onImageSetCallback();
 	}
