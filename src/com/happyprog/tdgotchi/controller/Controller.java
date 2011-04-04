@@ -58,6 +58,5 @@ public class Controller implements TestObserver {
 			tamagotchi.changeLevel(new LevelOne());
 			return;
 		}
-
 	}
 }

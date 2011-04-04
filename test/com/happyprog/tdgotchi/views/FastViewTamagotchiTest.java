@@ -74,4 +74,19 @@ public class FastViewTamagotchiTest {
 
 		verify(view).setImage(DEFAULT2);
 	}
+
+	@Test
+	public void onChangeLevel_updatesTamagotchiLevel() throws Exception {
+		when(level.getNormalMood()).thenReturn(DEFAULT_MOOD);
+		Tamagotchi tamagotchi = new FastViewTamagotchi(view, level);
+
+		Level newLevel = mock(Level.class);
+		when(newLevel.getNormalMood()).thenReturn(new Image[] { HAPPY1 });
+
+		tamagotchi.onImageSetCallback();
+		tamagotchi.changeLevel(newLevel);
+		tamagotchi.onImageSetCallback();
+
+		verify(view).setImage(HAPPY1);
+	}
 }

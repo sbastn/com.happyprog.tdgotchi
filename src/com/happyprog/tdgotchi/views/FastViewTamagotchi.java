@@ -9,7 +9,7 @@ import com.happyprog.tdgotchi.level.Level;
 public class FastViewTamagotchi implements Tamagotchi {
 
 	private final View view;
-	private final Level level;
+	private Level level;
 	private Stack<Image> moodStack;
 
 	public FastViewTamagotchi(View view, Level level) {
@@ -53,8 +53,7 @@ public class FastViewTamagotchi implements Tamagotchi {
 
 	@Override
 	public void changeLevel(Level level) {
-		// TODO Auto-generated method stub
-
+		this.level = level;
 	}
 
 }
