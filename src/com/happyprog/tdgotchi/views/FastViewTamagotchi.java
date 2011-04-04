@@ -33,15 +33,11 @@ public class FastViewTamagotchi implements Tamagotchi {
 	@Override
 	public void beHappy() {
 		pushToStack(level.getHappyMood());
-
-		updateMood();
 	}
 
 	@Override
 	public void beUpset() {
 		pushToStack(level.getUpsetMood());
-
-		updateMood();
 	}
 
 	@Override
@@ -53,6 +49,12 @@ public class FastViewTamagotchi implements Tamagotchi {
 		for (Image image : images) {
 			moodStack.push(image);
 		}
+	}
+
+	@Override
+	public void changeLevel(Level level) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

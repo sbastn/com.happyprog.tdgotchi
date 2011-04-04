@@ -1,10 +1,13 @@
 package com.happyprog.tdgotchi.controller;
 
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.happyprog.tdgotchi.level.LevelOne;
+import com.happyprog.tdgotchi.level.ZombieLevel;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 
@@ -57,5 +60,21 @@ public class ControllerTest {
 		controller.onFailingTest();
 
 		verifyZeroInteractions(tamagotchi);
+	}
+
+	@Test
+	public void ifScoreLessThanZero_tamagotchiLevelIsZombie() throws Exception {
+		controller.onFailingTest();
+		controller.onFailingTest();
+
+		verify(tamagotchi).changeLevel(isA(ZombieLevel.class));
+	}
+
+	@Test
+	public void ifScoreEqualsZero_tamagotchiLevelIsOne() throws Exception {
+		controller.onFailingTest();
+		controller.onPassingTest();
+
+		verify(tamagotchi).changeLevel(isA(LevelOne.class));
 	}
 }

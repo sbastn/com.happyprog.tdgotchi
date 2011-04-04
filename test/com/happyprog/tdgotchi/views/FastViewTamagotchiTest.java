@@ -48,6 +48,7 @@ public class FastViewTamagotchiTest {
 
 		Tamagotchi tamagotchi = new FastViewTamagotchi(view, level);
 		tamagotchi.beHappy();
+		tamagotchi.onImageSetCallback();
 
 		verify(view).setImage(HAPPY2);
 	}
@@ -59,6 +60,7 @@ public class FastViewTamagotchiTest {
 
 		Tamagotchi tamagotchi = new FastViewTamagotchi(view, level);
 		tamagotchi.beUpset();
+		tamagotchi.onImageSetCallback();
 
 		verify(view).setImage(UPSET2);
 	}
