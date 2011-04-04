@@ -1,7 +1,9 @@
 package com.happyprog.tdgotchi.views;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
@@ -13,16 +15,22 @@ public class MainView extends ViewPart implements View {
 
 	private static final int ONE_SECOND = 1000;
 	private Tamagotchi tamagotchi;
+	private Label scoreLabel;
 
 	@Override
 	public void createPartControl(Composite parent) {
-		tamagotchi = new FastViewTamagotchi(this, new LevelOne());
-		new Controller(tamagotchi, new JUnitTestSubscriber());
+		createController();
+		createScoreLabel(parent);
 	}
 
-	@Override
-	public void setFocus() {
-		// TODO Auto-generated method stub
+	private void createController() {
+		tamagotchi = new FastViewTamagotchi(this, new LevelOne());
+		new Controller(this, tamagotchi, new JUnitTestSubscriber());
+	}
+
+	private void createScoreLabel(Composite parent) {
+		scoreLabel = new Label(parent, SWT.NONE);
+		updateScore(0);
 	}
 
 	@Override
@@ -35,6 +43,22 @@ public class MainView extends ViewPart implements View {
 				tamagotchi.onImageSetCallback();
 			}
 		});
+	}
+
+	@Override
+	public void updateScore(final int points) {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				scoreLabel.setText(String.format("Score: %d", points));
+			}
+		});
+	}
+
+	@Override
+	public void setFocus() {
+		// TODO Auto-generated method stub
 	}
 
 }

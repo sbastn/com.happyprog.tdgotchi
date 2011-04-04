@@ -5,11 +5,14 @@ import com.happyprog.tdgotchi.level.ZombieLevel;
 import com.happyprog.tdgotchi.subscriber.TestObserver;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
+import com.happyprog.tdgotchi.views.View;
 
 public class Controller implements TestObserver {
 
+	private final View view;
 	private final TestSubscriber subscriber;
 	private final Tamagotchi tamagotchi;
+
 	private TestRun previousTestRun;
 	private int score;
 
@@ -17,7 +20,8 @@ public class Controller implements TestObserver {
 		PASS, FAIL
 	}
 
-	public Controller(Tamagotchi tamagotchi, TestSubscriber subscriber) {
+	public Controller(View view, Tamagotchi tamagotchi, TestSubscriber subscriber) {
+		this.view = view;
 		this.tamagotchi = tamagotchi;
 		this.subscriber = subscriber;
 
@@ -49,6 +53,11 @@ public class Controller implements TestObserver {
 	private void updateScoreWith(int points) {
 		score += points;
 
+		view.updateScore(score);
+		changeTamagotchiLevelBasedOnScore();
+	}
+
+	private void changeTamagotchiLevelBasedOnScore() {
 		if (score < 0) {
 			tamagotchi.changeLevel(new ZombieLevel());
 			return;

@@ -6,4 +6,6 @@ public interface View {
 
 	void setImage(Image image);
 
+	void updateScore(int points);
+
 }

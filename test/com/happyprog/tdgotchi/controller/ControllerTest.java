@@ -10,11 +10,13 @@ import com.happyprog.tdgotchi.level.LevelOne;
 import com.happyprog.tdgotchi.level.ZombieLevel;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
+import com.happyprog.tdgotchi.views.View;
 
 public class ControllerTest {
 
 	private TestSubscriber subscriber;
 	private Tamagotchi tamagotchi;
+	private View view;
 
 	private Controller controller;
 
@@ -22,7 +24,8 @@ public class ControllerTest {
 	public void before() {
 		subscriber = mock(TestSubscriber.class);
 		tamagotchi = mock(Tamagotchi.class);
-		controller = new Controller(tamagotchi, subscriber);
+		view = mock(View.class);
+		controller = new Controller(view, tamagotchi, subscriber);
 	}
 
 	@Test
@@ -76,5 +79,13 @@ public class ControllerTest {
 		controller.onPassingTest();
 
 		verify(tamagotchi).changeLevel(isA(LevelOne.class));
+	}
+
+	@Test
+	public void whenScoreChanges_viewIsUpdated() throws Exception {
+		controller.onFailingTest();
+		controller.onFailingTest();
+
+		verify(view).updateScore(-5);
 	}
 }
