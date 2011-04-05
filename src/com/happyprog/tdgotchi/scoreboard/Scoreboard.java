@@ -3,7 +3,7 @@ package com.happyprog.tdgotchi.scoreboard;
 import org.eclipse.swt.graphics.Image;
 
 import com.happyprog.tdgotchi.level.Level;
-import com.happyprog.tdgotchi.level.LevelOne;
+import com.happyprog.tdgotchi.level.FirstLevel;
 import com.happyprog.tdgotchi.level.ZombieLevel;
 import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
@@ -27,7 +27,7 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 	}
 
 	public Scoreboard(View view) {
-		this(view, new TinyTamagotchi(new LevelOne()), new JUnitTestSubscriber(), new ZombieLevel(), new LevelOne());
+		this(view, new TinyTamagotchi(new FirstLevel()), new JUnitTestSubscriber(), new ZombieLevel(), new FirstLevel());
 	}
 
 	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber subscriber, Level zombieLevel, Level firstLevel) {

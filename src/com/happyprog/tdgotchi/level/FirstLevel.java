@@ -4,7 +4,7 @@ import org.eclipse.swt.graphics.Image;
 
 import com.happyprog.tdgotchi.Activator;
 
-public class LevelOne implements Level {
+public class FirstLevel implements Level {
 
 	@Override
 	public Image[] getNormalMood() {
