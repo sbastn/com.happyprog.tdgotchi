@@ -6,7 +6,7 @@ import org.eclipse.swt.graphics.Image;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.happyprog.tdgotchi.level.Level;
+import com.happyprog.tdgotchi.level.Levels;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 import com.happyprog.tdgotchi.views.View;
@@ -18,17 +18,15 @@ public class ScoreboardTest {
 	private View view;
 
 	private Scoreboard scoreboard;
-	private Level zombieLevel;
-	private Level firstLevel;
+	private Levels levels;
 
 	@Before
 	public void before() {
 		view = mock(View.class);
 		tamagotchi = mock(Tamagotchi.class);
 		subscriber = mock(TestSubscriber.class);
-		zombieLevel = mock(Level.class);
-		firstLevel = mock(Level.class);
-		scoreboard = new Scoreboard(view, tamagotchi, subscriber, zombieLevel, firstLevel);
+		levels = mock(Levels.class);
+		scoreboard = new Scoreboard(view, tamagotchi, subscriber, levels);
 	}
 
 	@Test
@@ -38,7 +36,7 @@ public class ScoreboardTest {
 
 	@Test
 	public void whenStartingGame_tamagotchiLevelIsOne() throws Exception {
-		verify(tamagotchi).setLevel(firstLevel);
+		verify(tamagotchi).setLevel(levels.getFirstLevel());
 	}
 
 	@Test
@@ -80,13 +78,14 @@ public class ScoreboardTest {
 		scoreboard.onFailingTest();
 		scoreboard.onFailingTest();
 
-		verify(tamagotchi).setLevel(zombieLevel);
+		verify(tamagotchi).beUpset();
+		verify(tamagotchi, atLeastOnce()).setLevel(levels.getZombieLevel());
 	}
 
 	@Test
 	public void whenScoreChanges_viewIsUpdated() throws Exception {
 		Image image = new Image(null, "icons/health-zombie.png");
-		when(zombieLevel.getHealth()).thenReturn(image);
+		when(levels.getZombieLevelHealth()).thenReturn(image);
 
 		scoreboard.onFailingTest();
 		scoreboard.onFailingTest();
@@ -107,5 +106,12 @@ public class ScoreboardTest {
 		scoreboard.onImageSetCallback();
 
 		verify(tamagotchi).onImageSetCallback();
+	}
+
+	@Test
+	public void getDefaultHealth_returnsFirstLevelHealth() throws Exception {
+		scoreboard.getDefaultHealth();
+
+		verify(levels).getFirstLevelHealth();
 	}
 }

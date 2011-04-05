@@ -2,9 +2,8 @@ package com.happyprog.tdgotchi.scoreboard;
 
 import org.eclipse.swt.graphics.Image;
 
-import com.happyprog.tdgotchi.level.FirstLevel;
-import com.happyprog.tdgotchi.level.Level;
-import com.happyprog.tdgotchi.level.ZombieLevel;
+import com.happyprog.tdgotchi.level.Levels;
+import com.happyprog.tdgotchi.level.TamagotchiLevels;
 import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
@@ -19,23 +18,21 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 
 	private TestRun previousTestRun;
 	private int score;
-	private final Level zombieLevel;
-	private final Level firstLevel;
+	private final Levels levels;
 
 	private enum TestRun {
 		PASS, FAIL
 	}
 
 	public Scoreboard(View view) {
-		this(view, new TinyTamagotchi(), new JUnitTestSubscriber(), new ZombieLevel(), new FirstLevel());
+		this(view, new TinyTamagotchi(), new JUnitTestSubscriber(), new TamagotchiLevels());
 	}
 
-	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber subscriber, Level zombieLevel, Level firstLevel) {
+	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber subscriber, Levels levels) {
 		this.view = view;
 		this.tamagotchi = tamagotchi;
 		this.subscriber = subscriber;
-		this.zombieLevel = zombieLevel;
-		this.firstLevel = firstLevel;
+		this.levels = levels;
 
 		subscribeToJUnitEvents();
 		startTamagotchi(tamagotchi);
@@ -73,20 +70,20 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 
 	private void updateTamagoshiAndHealthLevel() {
 		if (score < 0) {
-			tamagotchi.setLevel(zombieLevel);
-			view.updateHealth(zombieLevel.getHealth());
+			tamagotchi.setLevel(levels.getZombieLevel());
+			view.updateHealth(levels.getZombieLevelHealth());
 			return;
 		}
 
 		if (score >= 0 && score <= 5) {
-			tamagotchi.setLevel(firstLevel);
-			view.updateHealth(firstLevel.getHealth());
+			tamagotchi.setLevel(levels.getFirstLevel());
+			view.updateHealth(levels.getFirstLevelHealth());
 			return;
 		}
 	}
 
 	private void startTamagotchi(Tamagotchi tamagotchi) {
-		tamagotchi.setLevel(firstLevel);
+		tamagotchi.setLevel(levels.getFirstLevel());
 		tamagotchi.addObserver(this);
 		tamagotchi.start();
 	}
@@ -100,6 +97,6 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 	}
 
 	public Image getDefaultHealth() {
-		return firstLevel.getHealth();
+		return levels.getFirstLevelHealth();
 	}
 }
