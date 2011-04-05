@@ -27,4 +27,9 @@ public class LevelOne implements Level {
 		return new Image[] { UPSET1, UPSET2, UPSET1, UPSET2, UPSET1, UPSET2, UPSET1, UPSET2 };
 	}
 
+	@Override
+	public Image getHealth() {
+		return Activator.getImageDescriptor("icons/health-level1.png").createImage();
+	}
+
 }

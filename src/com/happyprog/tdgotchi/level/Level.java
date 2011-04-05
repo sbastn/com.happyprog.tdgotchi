@@ -10,4 +10,6 @@ public interface Level {
 
 	Image[] getUpsetMood();
 
+	Image getHealth();
+
 }

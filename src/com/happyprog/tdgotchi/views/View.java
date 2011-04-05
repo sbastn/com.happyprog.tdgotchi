@@ -8,4 +8,6 @@ public interface View {
 
 	void updateScore(int points);
 
+	void updateHealth(Image health);
+
 }

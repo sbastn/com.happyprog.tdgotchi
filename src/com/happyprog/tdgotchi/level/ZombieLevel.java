@@ -27,4 +27,9 @@ public class ZombieLevel implements Level {
 		return new Image[] { UPSET1, UPSET2, UPSET1, UPSET2, UPSET1, UPSET2, UPSET1, UPSET2 };
 	}
 
+	@Override
+	public Image getHealth() {
+		return Activator.getImageDescriptor("icons/health-zombie.png").createImage();
+	}
+
 }

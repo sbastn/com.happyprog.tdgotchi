@@ -2,6 +2,7 @@ package com.happyprog.tdgotchi.scoreboard;
 
 import org.eclipse.swt.graphics.Image;
 
+import com.happyprog.tdgotchi.level.Level;
 import com.happyprog.tdgotchi.level.LevelOne;
 import com.happyprog.tdgotchi.level.ZombieLevel;
 import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
@@ -19,19 +20,23 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 
 	private TestRun previousTestRun;
 	private int score;
+	private final Level zombieLevel;
+	private final Level firstLevel;
 
 	private enum TestRun {
 		PASS, FAIL
 	}
 
 	public Scoreboard(View view) {
-		this(view, new FastViewTamagotchi(new LevelOne()), new JUnitTestSubscriber());
+		this(view, new FastViewTamagotchi(new LevelOne()), new JUnitTestSubscriber(), new ZombieLevel(), new LevelOne());
 	}
 
-	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber subscriber) {
+	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber subscriber, Level zombieLevel, Level firstLevel) {
 		this.view = view;
 		this.tamagotchi = tamagotchi;
 		this.subscriber = subscriber;
+		this.zombieLevel = zombieLevel;
+		this.firstLevel = firstLevel;
 
 		subscribeToJUnitEvents();
 		subscribeToTamagotchiEvents(tamagotchi);
@@ -64,17 +69,19 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 		score += points;
 
 		view.updateScore(score);
-		changeTamagotchiLevelBasedOnScore();
+		updateTamagoshiAndHealthLevel();
 	}
 
-	private void changeTamagotchiLevelBasedOnScore() {
+	private void updateTamagoshiAndHealthLevel() {
 		if (score < 0) {
-			tamagotchi.changeLevel(new ZombieLevel());
+			tamagotchi.changeLevel(zombieLevel);
+			view.updateHealth(zombieLevel.getHealth());
 			return;
 		}
 
 		if (score >= 0 && score <= 5) {
-			tamagotchi.changeLevel(new LevelOne());
+			tamagotchi.changeLevel(firstLevel);
+			view.updateHealth(firstLevel.getHealth());
 			return;
 		}
 	}
@@ -89,5 +96,9 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 
 	public void onImageSetCallback() {
 		tamagotchi.onImageSetCallback();
+	}
+
+	public Image getDefaultHealth() {
+		return firstLevel.getHealth();
 	}
 }

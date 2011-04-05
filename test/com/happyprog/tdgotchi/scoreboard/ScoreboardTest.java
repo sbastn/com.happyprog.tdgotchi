@@ -1,14 +1,12 @@
 package com.happyprog.tdgotchi.scoreboard;
 
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
+import org.eclipse.swt.graphics.Image;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.happyprog.tdgotchi.level.LevelOne;
-import com.happyprog.tdgotchi.level.ZombieLevel;
-import com.happyprog.tdgotchi.scoreboard.Scoreboard;
+import com.happyprog.tdgotchi.level.Level;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 import com.happyprog.tdgotchi.views.View;
@@ -20,13 +18,17 @@ public class ScoreboardTest {
 	private View view;
 
 	private Scoreboard scoreboard;
+	private Level zombieLevel;
+	private Level firstLevel;
 
 	@Before
 	public void before() {
-		subscriber = mock(TestSubscriber.class);
-		tamagotchi = mock(Tamagotchi.class);
 		view = mock(View.class);
-		scoreboard = new Scoreboard(view, tamagotchi, subscriber);
+		tamagotchi = mock(Tamagotchi.class);
+		subscriber = mock(TestSubscriber.class);
+		zombieLevel = mock(Level.class);
+		firstLevel = mock(Level.class);
+		scoreboard = new Scoreboard(view, tamagotchi, subscriber, zombieLevel, firstLevel);
 	}
 
 	@Test
@@ -73,7 +75,7 @@ public class ScoreboardTest {
 		scoreboard.onFailingTest();
 		scoreboard.onFailingTest();
 
-		verify(tamagotchi).changeLevel(isA(ZombieLevel.class));
+		verify(tamagotchi).changeLevel(zombieLevel);
 	}
 
 	@Test
@@ -81,15 +83,19 @@ public class ScoreboardTest {
 		scoreboard.onFailingTest();
 		scoreboard.onPassingTest();
 
-		verify(tamagotchi).changeLevel(isA(LevelOne.class));
+		verify(tamagotchi).changeLevel(firstLevel);
 	}
 
 	@Test
 	public void whenScoreChanges_viewIsUpdated() throws Exception {
+		Image image = new Image(null, "icons/health-zombie.png");
+		when(zombieLevel.getHealth()).thenReturn(image);
+
 		scoreboard.onFailingTest();
 		scoreboard.onFailingTest();
 
 		verify(view).updateScore(-5);
+		verify(view).updateHealth(image);
 	}
 
 	@Test
