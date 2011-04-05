@@ -11,13 +11,12 @@ public class TinyTamagotchi implements Tamagotchi {
 
 	private TamagotchiObserver observer;
 	private Level level;
-	private Stack<Image> moodStack;
+	private Stack<Image> moodStack = new Stack<Image>();
 
-	public TinyTamagotchi(Level level) {
-		this.level = level;
-
-		moodStack = new Stack<Image>();
+	@Override
+	public void start() {
 		pushToStack(level.getNormalMood());
+		updateMood();
 	}
 
 	@Override
@@ -36,15 +35,13 @@ public class TinyTamagotchi implements Tamagotchi {
 	}
 
 	@Override
-	public void changeLevel(Level level) {
+	public void setLevel(Level level) {
 		this.level = level;
 	}
 
 	@Override
 	public void addObserver(TamagotchiObserver observer) {
 		this.observer = observer;
-
-		updateMood();
 	}
 
 	private void updateMood() {

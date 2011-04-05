@@ -37,6 +37,11 @@ public class ScoreboardTest {
 	}
 
 	@Test
+	public void whenStartingGame_tamagotchiLevelIsOne() throws Exception {
+		verify(tamagotchi).setLevel(firstLevel);
+	}
+
+	@Test
 	public void onRedToGreen_tamagotchiIsHappy() throws Exception {
 		scoreboard.onFailingTest();
 		scoreboard.onPassingTest();
@@ -75,15 +80,7 @@ public class ScoreboardTest {
 		scoreboard.onFailingTest();
 		scoreboard.onFailingTest();
 
-		verify(tamagotchi).changeLevel(zombieLevel);
-	}
-
-	@Test
-	public void ifScoreEqualsZero_tamagotchiLevelIsOne() throws Exception {
-		scoreboard.onFailingTest();
-		scoreboard.onPassingTest();
-
-		verify(tamagotchi).changeLevel(firstLevel);
+		verify(tamagotchi).setLevel(zombieLevel);
 	}
 
 	@Test

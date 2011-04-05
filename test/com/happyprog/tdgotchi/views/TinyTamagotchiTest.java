@@ -26,30 +26,32 @@ public class TinyTamagotchiTest {
 
 	private TamagotchiObserver observer;
 	private Level level;
+	private Tamagotchi tamagotchi;
 
 	@Before
 	public void before() {
 		observer = mock(TamagotchiObserver.class);
 		level = mock(Level.class);
+		tamagotchi = new TinyTamagotchi();
+		tamagotchi.setLevel(level);
+		tamagotchi.addObserver(observer);
 	}
 
 	@Test
-	public void whenConstructed_updatesTheView() throws Exception {
+	public void whenStarted_ObserverIsNotifiedOfMoodChange() throws Exception {
 		when(level.getNormalMood()).thenReturn(DEFAULT_MOOD);
 
-		Tamagotchi tamagotchi = new TinyTamagotchi(level);
-		tamagotchi.addObserver(observer);
+		tamagotchi.start();
 
 		verify(observer).updateMood(DEFAULT2);
 	}
 
 	@Test
-	public void beHappy_updatesViewsImage() throws Exception {
+	public void beHappy_updatesObserver() throws Exception {
 		when(level.getNormalMood()).thenReturn(new Image[] { DEFAULT1 });
 		when(level.getHappyMood()).thenReturn(HAPPY_MOOD);
 
-		Tamagotchi tamagotchi = new TinyTamagotchi(level);
-		tamagotchi.addObserver(observer);
+		tamagotchi.start();
 
 		tamagotchi.beHappy();
 		tamagotchi.onImageSetCallback();
@@ -58,12 +60,11 @@ public class TinyTamagotchiTest {
 	}
 
 	@Test
-	public void beUpset_updatesViewsImage() throws Exception {
+	public void beUpset_updatesObserver() throws Exception {
 		when(level.getNormalMood()).thenReturn(new Image[] { DEFAULT1 });
 		when(level.getUpsetMood()).thenReturn(UPSET_MOOD);
 
-		Tamagotchi tamagotchi = new TinyTamagotchi(level);
-		tamagotchi.addObserver(observer);
+		tamagotchi.start();
 
 		tamagotchi.beUpset();
 		tamagotchi.onImageSetCallback();
@@ -72,29 +73,26 @@ public class TinyTamagotchiTest {
 	}
 
 	@Test
-	public void onImageSetCallback_updatesViewsImage() throws Exception {
+	public void onImageSetCallback_updatesObserver() throws Exception {
 		when(level.getNormalMood()).thenReturn(DEFAULT_MOOD);
 
-		Tamagotchi tamagotchi = new TinyTamagotchi(level);
-		tamagotchi.addObserver(observer);
-
+		tamagotchi.start();
 		tamagotchi.onImageSetCallback();
 
 		verify(observer).updateMood(DEFAULT2);
 	}
 
 	@Test
-	public void onChangeLevel_updatesTamagotchiLevel() throws Exception {
+	public void onChangeLevel_updatesObserverWithNewMoodImage() throws Exception {
 		when(level.getNormalMood()).thenReturn(DEFAULT_MOOD);
 
-		Tamagotchi tamagotchi = new TinyTamagotchi(level);
-		tamagotchi.addObserver(observer);
+		tamagotchi.start();
 
 		Level newLevel = mock(Level.class);
 		when(newLevel.getNormalMood()).thenReturn(new Image[] { HAPPY1 });
 
 		tamagotchi.onImageSetCallback();
-		tamagotchi.changeLevel(newLevel);
+		tamagotchi.setLevel(newLevel);
 		tamagotchi.onImageSetCallback();
 
 		verify(observer).updateMood(HAPPY1);

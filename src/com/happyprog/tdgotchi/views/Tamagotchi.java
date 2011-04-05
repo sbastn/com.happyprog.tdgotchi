@@ -11,8 +11,10 @@ public interface Tamagotchi {
 
 	void onImageSetCallback();
 
-	void changeLevel(Level level);
+	void setLevel(Level level);
 
 	void addObserver(TamagotchiObserver observer);
+
+	void start();
 
 }
