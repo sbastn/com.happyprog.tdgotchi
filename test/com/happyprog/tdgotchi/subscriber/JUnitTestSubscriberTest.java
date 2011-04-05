@@ -7,6 +7,8 @@ import org.eclipse.jdt.junit.model.ITestRunSession;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.happyprog.tdgotchi.scoreboard.TestObserver;
+
 public class JUnitTestSubscriberTest {
 
 	private TestObserver observer;

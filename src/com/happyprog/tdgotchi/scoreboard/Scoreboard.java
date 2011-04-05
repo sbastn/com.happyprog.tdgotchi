@@ -6,9 +6,8 @@ import com.happyprog.tdgotchi.level.Level;
 import com.happyprog.tdgotchi.level.LevelOne;
 import com.happyprog.tdgotchi.level.ZombieLevel;
 import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
-import com.happyprog.tdgotchi.subscriber.TestObserver;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
-import com.happyprog.tdgotchi.views.FastViewTamagotchi;
+import com.happyprog.tdgotchi.views.TinyTamagotchi;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 import com.happyprog.tdgotchi.views.View;
 
@@ -28,7 +27,7 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 	}
 
 	public Scoreboard(View view) {
-		this(view, new FastViewTamagotchi(new LevelOne()), new JUnitTestSubscriber(), new ZombieLevel(), new LevelOne());
+		this(view, new TinyTamagotchi(new LevelOne()), new JUnitTestSubscriber(), new ZombieLevel(), new LevelOne());
 	}
 
 	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber subscriber, Level zombieLevel, Level firstLevel) {

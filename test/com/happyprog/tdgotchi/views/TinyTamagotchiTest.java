@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.happyprog.tdgotchi.level.Level;
 import com.happyprog.tdgotchi.scoreboard.TamagotchiObserver;
 
-public class FastViewTamagotchiTest {
+public class TinyTamagotchiTest {
 
 	private static final Image DEFAULT1 = new Image(null, "icons/level1-default1.png");
 	private static final Image DEFAULT2 = new Image(null, "icons/level1-default2.png");
@@ -37,7 +37,7 @@ public class FastViewTamagotchiTest {
 	public void whenConstructed_updatesTheView() throws Exception {
 		when(level.getNormalMood()).thenReturn(DEFAULT_MOOD);
 
-		Tamagotchi tamagotchi = new FastViewTamagotchi(level);
+		Tamagotchi tamagotchi = new TinyTamagotchi(level);
 		tamagotchi.addObserver(observer);
 
 		verify(observer).updateMood(DEFAULT2);
@@ -48,7 +48,7 @@ public class FastViewTamagotchiTest {
 		when(level.getNormalMood()).thenReturn(new Image[] { DEFAULT1 });
 		when(level.getHappyMood()).thenReturn(HAPPY_MOOD);
 
-		Tamagotchi tamagotchi = new FastViewTamagotchi(level);
+		Tamagotchi tamagotchi = new TinyTamagotchi(level);
 		tamagotchi.addObserver(observer);
 
 		tamagotchi.beHappy();
@@ -62,7 +62,7 @@ public class FastViewTamagotchiTest {
 		when(level.getNormalMood()).thenReturn(new Image[] { DEFAULT1 });
 		when(level.getUpsetMood()).thenReturn(UPSET_MOOD);
 
-		Tamagotchi tamagotchi = new FastViewTamagotchi(level);
+		Tamagotchi tamagotchi = new TinyTamagotchi(level);
 		tamagotchi.addObserver(observer);
 
 		tamagotchi.beUpset();
@@ -75,7 +75,7 @@ public class FastViewTamagotchiTest {
 	public void onImageSetCallback_updatesViewsImage() throws Exception {
 		when(level.getNormalMood()).thenReturn(DEFAULT_MOOD);
 
-		Tamagotchi tamagotchi = new FastViewTamagotchi(level);
+		Tamagotchi tamagotchi = new TinyTamagotchi(level);
 		tamagotchi.addObserver(observer);
 
 		tamagotchi.onImageSetCallback();
@@ -87,7 +87,7 @@ public class FastViewTamagotchiTest {
 	public void onChangeLevel_updatesTamagotchiLevel() throws Exception {
 		when(level.getNormalMood()).thenReturn(DEFAULT_MOOD);
 
-		Tamagotchi tamagotchi = new FastViewTamagotchi(level);
+		Tamagotchi tamagotchi = new TinyTamagotchi(level);
 		tamagotchi.addObserver(observer);
 
 		Level newLevel = mock(Level.class);

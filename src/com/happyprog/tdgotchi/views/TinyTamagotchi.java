@@ -7,13 +7,13 @@ import org.eclipse.swt.graphics.Image;
 import com.happyprog.tdgotchi.level.Level;
 import com.happyprog.tdgotchi.scoreboard.TamagotchiObserver;
 
-public class FastViewTamagotchi implements Tamagotchi {
+public class TinyTamagotchi implements Tamagotchi {
 
 	private TamagotchiObserver observer;
 	private Level level;
 	private Stack<Image> moodStack;
 
-	public FastViewTamagotchi(Level level) {
+	public TinyTamagotchi(Level level) {
 		this.level = level;
 
 		moodStack = new Stack<Image>();
