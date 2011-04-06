@@ -2,34 +2,36 @@ package com.happyprog.tdgotchi.level;
 
 import org.eclipse.swt.graphics.Image;
 
-import com.happyprog.tdgotchi.Activator;
-
 public class FirstLevel implements Level {
+
+	private final MoodManager moodManager;
+
+	public FirstLevel() {
+		this(new TinyMoodManager());
+	}
+
+	public FirstLevel(MoodManager moodManager) {
+		this.moodManager = moodManager;
+	}
 
 	@Override
 	public Image[] getNormalMood() {
-		Image NORMAL1 = Activator.getImageDescriptor("icons/level1-default1.png").createImage();
-		Image NORMAL2 = Activator.getImageDescriptor("icons/level1-default2.png").createImage();
-		return new Image[] { NORMAL1, NORMAL2 };
+		return moodManager.getNormalMoodForLevel(1);
 	}
 
 	@Override
 	public Image[] getHappyMood() {
-		Image HAPPY1 = Activator.getImageDescriptor("icons/level1-happy1.png").createImage();
-		Image HAPPY2 = Activator.getImageDescriptor("icons/level1-happy2.png").createImage();
-		return new Image[] { HAPPY1, HAPPY2, HAPPY1, HAPPY2, HAPPY1, HAPPY2, HAPPY1, HAPPY2 };
+		return moodManager.getHappyMoodForLevel(1);
 	}
 
 	@Override
 	public Image[] getUpsetMood() {
-		Image UPSET1 = Activator.getImageDescriptor("icons/level1-upset1.png").createImage();
-		Image UPSET2 = Activator.getImageDescriptor("icons/level1-upset2.png").createImage();
-		return new Image[] { UPSET1, UPSET2, UPSET1, UPSET2, UPSET1, UPSET2, UPSET1, UPSET2 };
+		return moodManager.getUpsetMoodForLevel(1);
 	}
 
 	@Override
 	public Image getHealth() {
-		return Activator.getImageDescriptor("icons/health-level1.png").createImage();
+		return moodManager.getHealthForLevel(1);
 	}
 
 }

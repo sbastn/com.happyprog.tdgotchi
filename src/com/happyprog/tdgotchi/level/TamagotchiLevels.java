@@ -4,27 +4,36 @@ import org.eclipse.swt.graphics.Image;
 
 public class TamagotchiLevels implements Levels {
 
-	private static final FirstLevel FIRST_LEVEL = new FirstLevel();
-	private static final ZombieLevel ZOMBIE_LEVEL = new ZombieLevel();
+	private final Level firstLevel;
+	private final Level zombieLevel;
+
+	public TamagotchiLevels() {
+		this(new FirstLevel(), new ZombieLevel());
+	}
+
+	public TamagotchiLevels(Level firstLevel, Level zombieLevel) {
+		this.firstLevel = firstLevel;
+		this.zombieLevel = zombieLevel;
+	}
 
 	@Override
 	public Level getFirstLevel() {
-		return FIRST_LEVEL;
+		return firstLevel;
 	}
 
 	@Override
 	public Level getZombieLevel() {
-		return ZOMBIE_LEVEL;
+		return zombieLevel;
 	}
 
 	@Override
 	public Image getFirstLevelHealth() {
-		return FIRST_LEVEL.getHealth();
+		return firstLevel.getHealth();
 	}
 
 	@Override
 	public Image getZombieLevelHealth() {
-		return ZOMBIE_LEVEL.getHealth();
+		return zombieLevel.getHealth();
 	}
 
 }

@@ -6,30 +6,34 @@ import com.happyprog.tdgotchi.Activator;
 
 public class ZombieLevel implements Level {
 
+	private final MoodManager moodManager;
+
+	public ZombieLevel() {
+		this(new TinyMoodManager());
+	}
+
+	public ZombieLevel(MoodManager moodManager) {
+		this.moodManager = moodManager;
+	}
+
 	@Override
 	public Image[] getNormalMood() {
-		Image NORMAL1 = Activator.getImageDescriptor("icons/zombie-default1.png").createImage();
-		Image NORMAL2 = Activator.getImageDescriptor("icons/zombie-default2.png").createImage();
-		return new Image[] { NORMAL1, NORMAL2 };
+		return moodManager.getNormalMoodForLevel(0);
 	}
 
 	@Override
 	public Image[] getHappyMood() {
-		Image HAPPY1 = Activator.getImageDescriptor("icons/zombie-happy1.png").createImage();
-		Image HAPPY2 = Activator.getImageDescriptor("icons/zombie-happy2.png").createImage();
-		return new Image[] { HAPPY1, HAPPY2, HAPPY1, HAPPY2, HAPPY1, HAPPY2, HAPPY1, HAPPY2 };
+		return moodManager.getHappyMoodForLevel(0);
 	}
 
 	@Override
 	public Image[] getUpsetMood() {
-		Image UPSET1 = Activator.getImageDescriptor("icons/zombie-upset1.png").createImage();
-		Image UPSET2 = Activator.getImageDescriptor("icons/zombie-upset2.png").createImage();
-		return new Image[] { UPSET1, UPSET2, UPSET1, UPSET2, UPSET1, UPSET2, UPSET1, UPSET2 };
+		return moodManager.getUpsetMoodForLevel(0);
 	}
 
 	@Override
 	public Image getHealth() {
-		return Activator.getImageDescriptor("icons/health-zombie.png").createImage();
+		return moodManager.getHealthForLevel(0);
 	}
 
 }
