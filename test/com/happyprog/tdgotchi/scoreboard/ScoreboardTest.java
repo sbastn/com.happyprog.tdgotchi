@@ -7,11 +7,10 @@ import org.eclipse.swt.graphics.Image;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.happyprog.tdgotchi.level.FirstLevel;
-import com.happyprog.tdgotchi.level.Levels;
-import com.happyprog.tdgotchi.level.SecondLevel;
-import com.happyprog.tdgotchi.level.ThirdLevel;
-import com.happyprog.tdgotchi.level.ZombieLevel;
+import com.happyprog.tdgotchi.level.Beginner;
+import com.happyprog.tdgotchi.level.Intermediate;
+import com.happyprog.tdgotchi.level.Pro;
+import com.happyprog.tdgotchi.level.Zombie;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 import com.happyprog.tdgotchi.views.View;
@@ -23,19 +22,19 @@ public class ScoreboardTest {
 	private View view;
 
 	private Scoreboard scoreboard;
-	private Levels levels;
+	private LevelManager levels;
 
 	@Before
 	public void before() {
 		view = mock(View.class);
 		tamagotchi = mock(Tamagotchi.class);
 		subscriber = mock(TestSubscriber.class);
-		levels = mock(Levels.class);
+		levels = mock(LevelManager.class);
 
-		when(levels.getZombieLevel()).thenReturn(new ZombieLevel());
-		when(levels.getFirstLevel()).thenReturn(new FirstLevel());
-		when(levels.getSecondLevel()).thenReturn(new SecondLevel());
-		when(levels.getThirdLevel()).thenReturn(new ThirdLevel());
+		when(levels.getZombie()).thenReturn(new Zombie());
+		when(levels.getBeginner()).thenReturn(new Beginner());
+		when(levels.getIntermediate()).thenReturn(new Intermediate());
+		when(levels.getPro()).thenReturn(new Pro());
 
 		scoreboard = new Scoreboard(view, tamagotchi, subscriber, levels);
 	}
@@ -47,7 +46,7 @@ public class ScoreboardTest {
 
 	@Test
 	public void whenStartingGame_tamagotchiLevelIsOne() throws Exception {
-		verify(tamagotchi).setLevel(levels.getFirstLevel());
+		verify(tamagotchi).setLevel(levels.getBeginner());
 	}
 
 	@Test
@@ -90,7 +89,7 @@ public class ScoreboardTest {
 		scoreboard.onFailingTest();
 
 		verify(tamagotchi).beUpset();
-		verify(tamagotchi, times(1)).setLevel(isA(ZombieLevel.class));
+		verify(tamagotchi, times(1)).setLevel(isA(Zombie.class));
 	}
 
 	@Test
@@ -101,7 +100,7 @@ public class ScoreboardTest {
 		}
 
 		verify(tamagotchi, times(8)).beHappy();
-		verify(tamagotchi, times(9)).setLevel(isA(FirstLevel.class));
+		verify(tamagotchi, times(9)).setLevel(isA(Beginner.class));
 	}
 
 	@Test
@@ -113,8 +112,8 @@ public class ScoreboardTest {
 
 		verify(tamagotchi, times(12)).beHappy();
 		// One more invocation for the level one since it is set at the start
-		verify(tamagotchi, times(11)).setLevel(isA(FirstLevel.class));
-		verify(tamagotchi, times(2)).setLevel(isA(SecondLevel.class));
+		verify(tamagotchi, times(11)).setLevel(isA(Beginner.class));
+		verify(tamagotchi, times(2)).setLevel(isA(Intermediate.class));
 	}
 
 	@Test
@@ -125,15 +124,15 @@ public class ScoreboardTest {
 		}
 
 		verify(tamagotchi, times(22)).beHappy();
-		verify(tamagotchi, times(11)).setLevel(isA(FirstLevel.class));
-		verify(tamagotchi, times(10)).setLevel(isA(SecondLevel.class));
-		verify(tamagotchi, times(2)).setLevel(isA(ThirdLevel.class));
+		verify(tamagotchi, times(11)).setLevel(isA(Beginner.class));
+		verify(tamagotchi, times(10)).setLevel(isA(Intermediate.class));
+		verify(tamagotchi, times(2)).setLevel(isA(Pro.class));
 	}
 
 	@Test
 	public void whenScoreChanges_viewIsUpdated() throws Exception {
 		Image image = new Image(null, "icons/level0-health.png");
-		when(levels.getZombieLevelHealth()).thenReturn(image);
+		when(levels.getZombieHealth()).thenReturn(image);
 
 		scoreboard.onFailingTest();
 		scoreboard.onFailingTest();
@@ -160,6 +159,6 @@ public class ScoreboardTest {
 	public void getDefaultHealth_returnsFirstLevelHealth() throws Exception {
 		scoreboard.getDefaultHealth();
 
-		verify(levels).getFirstLevelHealth();
+		verify(levels).getBeginnerHealth();
 	}
 }

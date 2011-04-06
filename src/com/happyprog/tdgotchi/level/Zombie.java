@@ -2,36 +2,38 @@ package com.happyprog.tdgotchi.level;
 
 import org.eclipse.swt.graphics.Image;
 
-public class FirstLevel implements Level {
+import com.happyprog.tdgotchi.scoreboard.MoodManager;
+
+public class Zombie implements Level {
 
 	private final MoodManager moodManager;
 
-	public FirstLevel() {
+	public Zombie() {
 		this(new TinyMoodManager());
 	}
 
-	public FirstLevel(MoodManager moodManager) {
+	public Zombie(MoodManager moodManager) {
 		this.moodManager = moodManager;
 	}
 
 	@Override
 	public Image[] getNormalMood() {
-		return moodManager.getNormalMoodForLevel(1);
+		return moodManager.getNormalMoodForLevel(0);
 	}
 
 	@Override
 	public Image[] getHappyMood() {
-		return moodManager.getHappyMoodForLevel(1);
+		return moodManager.getHappyMoodForLevel(0);
 	}
 
 	@Override
 	public Image[] getUpsetMood() {
-		return moodManager.getUpsetMoodForLevel(1);
+		return moodManager.getUpsetMoodForLevel(0);
 	}
 
 	@Override
 	public Image getHealth() {
-		return moodManager.getHealthForLevel(1);
+		return moodManager.getHealthForLevel(0);
 	}
 
 }

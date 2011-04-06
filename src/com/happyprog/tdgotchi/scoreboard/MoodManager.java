@@ -1,4 +1,4 @@
-package com.happyprog.tdgotchi.level;
+package com.happyprog.tdgotchi.scoreboard;
 
 import org.eclipse.swt.graphics.Image;
 

@@ -2,36 +2,38 @@ package com.happyprog.tdgotchi.level;
 
 import org.eclipse.swt.graphics.Image;
 
-public class SecondLevel implements Level {
+import com.happyprog.tdgotchi.scoreboard.MoodManager;
+
+public class Pro implements Level {
 
 	private final MoodManager moodManager;
 
-	public SecondLevel() {
+	public Pro() {
 		this(new TinyMoodManager());
 	}
 
-	public SecondLevel(MoodManager moodManager) {
+	public Pro(MoodManager moodManager) {
 		this.moodManager = moodManager;
 	}
 
 	@Override
 	public Image[] getNormalMood() {
-		return moodManager.getNormalMoodForLevel(2);
+		return moodManager.getNormalMoodForLevel(3);
 	}
 
 	@Override
 	public Image[] getHappyMood() {
-		return moodManager.getHappyMoodForLevel(2);
+		return moodManager.getHappyMoodForLevel(3);
 	}
 
 	@Override
 	public Image[] getUpsetMood() {
-		return moodManager.getUpsetMoodForLevel(2);
+		return moodManager.getUpsetMoodForLevel(3);
 	}
 
 	@Override
 	public Image getHealth() {
-		return moodManager.getHealthForLevel(2);
+		return moodManager.getHealthForLevel(3);
 	}
 
 }

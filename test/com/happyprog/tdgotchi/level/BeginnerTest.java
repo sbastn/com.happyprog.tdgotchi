@@ -5,15 +5,17 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FirstLevelTest {
+import com.happyprog.tdgotchi.scoreboard.MoodManager;
+
+public class BeginnerTest {
 
 	private MoodManager moodManager;
-	private FirstLevel level;
+	private Beginner level;
 
 	@Before
 	public void before() {
 		moodManager = mock(MoodManager.class);
-		level = new FirstLevel(moodManager);
+		level = new Beginner(moodManager);
 	}
 
 	@Test

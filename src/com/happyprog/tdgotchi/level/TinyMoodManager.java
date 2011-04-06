@@ -3,6 +3,7 @@ package com.happyprog.tdgotchi.level;
 import org.eclipse.swt.graphics.Image;
 
 import com.happyprog.tdgotchi.Activator;
+import com.happyprog.tdgotchi.scoreboard.MoodManager;
 
 public class TinyMoodManager implements MoodManager {
 

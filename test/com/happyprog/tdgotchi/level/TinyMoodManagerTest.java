@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.happyprog.tdgotchi.Activator;
+import com.happyprog.tdgotchi.scoreboard.MoodManager;
 
 public class TinyMoodManagerTest {
 

@@ -7,9 +7,11 @@ import org.eclipse.swt.graphics.Image;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TamagotchiLevelsTest {
+import com.happyprog.tdgotchi.scoreboard.LevelManager;
 
-	private Levels levels;
+public class TinyLevelManagerTest {
+
+	private LevelManager levels;
 	private Level firstLevel;
 	private Level zombieLevel;
 	private Level secondLevel;
@@ -22,31 +24,31 @@ public class TamagotchiLevelsTest {
 		secondLevel = mock(Level.class);
 		thirdLevel = mock(Level.class);
 
-		levels = new TamagotchiLevels(firstLevel, secondLevel, thirdLevel, zombieLevel);
+		levels = new TinyLevelManager(firstLevel, secondLevel, thirdLevel, zombieLevel);
 	}
 
 	@Test
 	public void getFirstLevel_returnsCorrectLevel() throws Exception {
-		TamagotchiLevels levels = new TamagotchiLevels();
-		assertTrue(levels.getFirstLevel() instanceof FirstLevel);
+		TinyLevelManager levels = new TinyLevelManager();
+		assertTrue(levels.getBeginner() instanceof Beginner);
 	}
 
 	@Test
 	public void getZombieLevel_returnsCorrectLevel() throws Exception {
-		TamagotchiLevels levels = new TamagotchiLevels();
-		assertTrue(levels.getZombieLevel() instanceof ZombieLevel);
+		TinyLevelManager levels = new TinyLevelManager();
+		assertTrue(levels.getZombie() instanceof Zombie);
 	}
 
 	@Test
 	public void getSecondLevel_returnCorrectLevel() throws Exception {
-		TamagotchiLevels levels = new TamagotchiLevels();
-		assertTrue(levels.getSecondLevel() instanceof SecondLevel);
+		TinyLevelManager levels = new TinyLevelManager();
+		assertTrue(levels.getIntermediate() instanceof Intermediate);
 	}
 
 	@Test
 	public void getThirdLevel_returnCorrectLevel() throws Exception {
-		TamagotchiLevels levels = new TamagotchiLevels();
-		assertTrue(levels.getThirdLevel() instanceof ThirdLevel);
+		TinyLevelManager levels = new TinyLevelManager();
+		assertTrue(levels.getPro() instanceof Pro);
 	}
 
 	@Test
@@ -54,7 +56,7 @@ public class TamagotchiLevelsTest {
 		Image image = new Image(null, "icons/level1-health.png");
 		when(firstLevel.getHealth()).thenReturn(image);
 
-		assertEquals(image, levels.getFirstLevelHealth());
+		assertEquals(image, levels.getBeginnerHealth());
 	}
 
 	@Test
@@ -62,7 +64,7 @@ public class TamagotchiLevelsTest {
 		Image image = new Image(null, "icons/level0-health.png");
 		when(zombieLevel.getHealth()).thenReturn(image);
 
-		assertEquals(image, levels.getZombieLevelHealth());
+		assertEquals(image, levels.getZombieHealth());
 	}
 
 	@Test
@@ -70,7 +72,7 @@ public class TamagotchiLevelsTest {
 		Image image = new Image(null, "icons/level2-health.png");
 		when(secondLevel.getHealth()).thenReturn(image);
 
-		assertEquals(image, levels.getSecondLevelHealth());
+		assertEquals(image, levels.getIntermediateHealth());
 	}
 
 	@Test
@@ -78,6 +80,6 @@ public class TamagotchiLevelsTest {
 		Image image = new Image(null, "icons/level3-health.png");
 		when(thirdLevel.getHealth()).thenReturn(image);
 
-		assertEquals(image, levels.getThirdLevelHealth());
+		assertEquals(image, levels.getProHealth());
 	}
 }
