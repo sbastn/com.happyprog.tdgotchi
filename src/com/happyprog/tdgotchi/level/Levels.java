@@ -8,8 +8,16 @@ public interface Levels {
 
 	Level getZombieLevel();
 
+	Level getSecondLevel();
+
 	Image getFirstLevelHealth();
 
 	Image getZombieLevelHealth();
+
+	Image getSecondLevelHealth();
+
+	Level getThirdLevel();
+
+	Image getThirdLevelHealth();
 
 }

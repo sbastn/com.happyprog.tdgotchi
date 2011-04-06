@@ -1,12 +1,17 @@
 package com.happyprog.tdgotchi.scoreboard;
 
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import org.eclipse.swt.graphics.Image;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.happyprog.tdgotchi.level.FirstLevel;
 import com.happyprog.tdgotchi.level.Levels;
+import com.happyprog.tdgotchi.level.SecondLevel;
+import com.happyprog.tdgotchi.level.ThirdLevel;
+import com.happyprog.tdgotchi.level.ZombieLevel;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 import com.happyprog.tdgotchi.views.View;
@@ -26,6 +31,12 @@ public class ScoreboardTest {
 		tamagotchi = mock(Tamagotchi.class);
 		subscriber = mock(TestSubscriber.class);
 		levels = mock(Levels.class);
+
+		when(levels.getZombieLevel()).thenReturn(new ZombieLevel());
+		when(levels.getFirstLevel()).thenReturn(new FirstLevel());
+		when(levels.getSecondLevel()).thenReturn(new SecondLevel());
+		when(levels.getThirdLevel()).thenReturn(new ThirdLevel());
+
 		scoreboard = new Scoreboard(view, tamagotchi, subscriber, levels);
 	}
 
@@ -79,7 +90,44 @@ public class ScoreboardTest {
 		scoreboard.onFailingTest();
 
 		verify(tamagotchi).beUpset();
-		verify(tamagotchi, atLeastOnce()).setLevel(levels.getZombieLevel());
+		verify(tamagotchi, times(1)).setLevel(isA(ZombieLevel.class));
+	}
+
+	@Test
+	public void ifScoreBetweenZeroAndTen_tamagotchiLevelIsOne() throws Exception {
+		for (int i = 0; i < 8; i++) {
+			scoreboard.onFailingTest();
+			scoreboard.onPassingTest();
+		}
+
+		verify(tamagotchi, times(8)).beHappy();
+		verify(tamagotchi, times(9)).setLevel(isA(FirstLevel.class));
+	}
+
+	@Test
+	public void ifScoreIsBetweenFiveAndTwenty_tamagotchiLevelIsTwo() throws Exception {
+		for (int i = 0; i < 12; i++) {
+			scoreboard.onFailingTest();
+			scoreboard.onPassingTest();
+		}
+
+		verify(tamagotchi, times(12)).beHappy();
+		// One more invocation for the level one since it is set at the start
+		verify(tamagotchi, times(11)).setLevel(isA(FirstLevel.class));
+		verify(tamagotchi, times(2)).setLevel(isA(SecondLevel.class));
+	}
+
+	@Test
+	public void ifScoreIsGreaterThanTwenty_tamagotchiLevelIsThree() throws Exception {
+		for (int i = 0; i < 22; i++) {
+			scoreboard.onFailingTest();
+			scoreboard.onPassingTest();
+		}
+
+		verify(tamagotchi, times(22)).beHappy();
+		verify(tamagotchi, times(11)).setLevel(isA(FirstLevel.class));
+		verify(tamagotchi, times(10)).setLevel(isA(SecondLevel.class));
+		verify(tamagotchi, times(2)).setLevel(isA(ThirdLevel.class));
 	}
 
 	@Test

@@ -75,11 +75,20 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 			return;
 		}
 
-		if (score >= 0 && score <= 5) {
+		if (score >= 0 && score <= 10) {
 			tamagotchi.setLevel(levels.getFirstLevel());
 			view.updateHealth(levels.getFirstLevelHealth());
 			return;
 		}
+
+		if (score > 10 && score <= 20) {
+			tamagotchi.setLevel(levels.getSecondLevel());
+			view.updateHealth(levels.getSecondLevelHealth());
+			return;
+		}
+
+		tamagotchi.setLevel(levels.getThirdLevel());
+		view.updateHealth(levels.getThirdLevelHealth());
 	}
 
 	private void startTamagotchi(Tamagotchi tamagotchi) {

@@ -6,13 +6,17 @@ public class TamagotchiLevels implements Levels {
 
 	private final Level firstLevel;
 	private final Level zombieLevel;
+	private final Level secondLevel;
+	private final Level thirdLevel;
 
 	public TamagotchiLevels() {
-		this(new FirstLevel(), new ZombieLevel());
+		this(new FirstLevel(), new SecondLevel(), new ThirdLevel(), new ZombieLevel());
 	}
 
-	public TamagotchiLevels(Level firstLevel, Level zombieLevel) {
+	public TamagotchiLevels(Level firstLevel, Level secondLevel, Level thirdLevel, Level zombieLevel) {
 		this.firstLevel = firstLevel;
+		this.secondLevel = secondLevel;
+		this.thirdLevel = thirdLevel;
 		this.zombieLevel = zombieLevel;
 	}
 
@@ -34,6 +38,26 @@ public class TamagotchiLevels implements Levels {
 	@Override
 	public Image getZombieLevelHealth() {
 		return zombieLevel.getHealth();
+	}
+
+	@Override
+	public Level getSecondLevel() {
+		return secondLevel;
+	}
+
+	@Override
+	public Image getSecondLevelHealth() {
+		return secondLevel.getHealth();
+	}
+
+	@Override
+	public Level getThirdLevel() {
+		return thirdLevel;
+	}
+
+	@Override
+	public Image getThirdLevelHealth() {
+		return thirdLevel.getHealth();
 	}
 
 }
