@@ -12,74 +12,74 @@ import com.happyprog.tdgotchi.scoreboard.LevelManager;
 public class TinyLevelManagerTest {
 
 	private LevelManager levels;
-	private Level firstLevel;
-	private Level zombieLevel;
-	private Level secondLevel;
-	private Level thirdLevel;
+	private Level beginner;
+	private Level zombie;
+	private Level intermediate;
+	private Level pro;
 
 	@Before
 	public void before() {
-		firstLevel = mock(Level.class);
-		zombieLevel = mock(Level.class);
-		secondLevel = mock(Level.class);
-		thirdLevel = mock(Level.class);
+		beginner = mock(Level.class);
+		zombie = mock(Level.class);
+		intermediate = mock(Level.class);
+		pro = mock(Level.class);
 
-		levels = new TinyLevelManager(firstLevel, secondLevel, thirdLevel, zombieLevel);
+		levels = new TinyLevelManager(beginner, intermediate, pro, zombie);
 	}
 
 	@Test
-	public void getFirstLevel_returnsCorrectLevel() throws Exception {
+	public void getBeginner_returnsBeginnerLevel() throws Exception {
 		TinyLevelManager levels = new TinyLevelManager();
 		assertTrue(levels.getBeginner() instanceof Beginner);
 	}
 
 	@Test
-	public void getZombieLevel_returnsCorrectLevel() throws Exception {
-		TinyLevelManager levels = new TinyLevelManager();
-		assertTrue(levels.getZombie() instanceof Zombie);
-	}
-
-	@Test
-	public void getSecondLevel_returnCorrectLevel() throws Exception {
+	public void getIntermediate_returnsIntermediateLevel() throws Exception {
 		TinyLevelManager levels = new TinyLevelManager();
 		assertTrue(levels.getIntermediate() instanceof Intermediate);
 	}
 
 	@Test
-	public void getThirdLevel_returnCorrectLevel() throws Exception {
+	public void getPro_returnsProLevel() throws Exception {
 		TinyLevelManager levels = new TinyLevelManager();
 		assertTrue(levels.getPro() instanceof Pro);
 	}
 
 	@Test
-	public void getFirstLevelHealh_returnsCorrectHealth() throws Exception {
-		Image image = new Image(null, "icons/level1-health.png");
-		when(firstLevel.getHealth()).thenReturn(image);
+	public void getZombie_returnsZombieLevel() throws Exception {
+		TinyLevelManager levels = new TinyLevelManager();
+		assertTrue(levels.getZombie() instanceof Zombie);
+	}
+
+	@Test
+	public void getBeginnerHealh_returnsImage() throws Exception {
+		Image image = new Image(null, "icons/Beginner-health.png");
+		when(beginner.getHealth()).thenReturn(image);
 
 		assertEquals(image, levels.getBeginnerHealth());
 	}
 
 	@Test
-	public void getZombieLevelHealh_returnsCorrectHealth() throws Exception {
-		Image image = new Image(null, "icons/level0-health.png");
-		when(zombieLevel.getHealth()).thenReturn(image);
-
-		assertEquals(image, levels.getZombieHealth());
-	}
-
-	@Test
-	public void getSecondLevel_returnsCorrectHealth() throws Exception {
-		Image image = new Image(null, "icons/level2-health.png");
-		when(secondLevel.getHealth()).thenReturn(image);
+	public void getIntermediateHealth_returnsImage() throws Exception {
+		Image image = new Image(null, "icons/Intermediate-health.png");
+		when(intermediate.getHealth()).thenReturn(image);
 
 		assertEquals(image, levels.getIntermediateHealth());
 	}
 
 	@Test
-	public void getThirdLevel_returnsCorrectHealth() throws Exception {
-		Image image = new Image(null, "icons/level3-health.png");
-		when(thirdLevel.getHealth()).thenReturn(image);
+	public void getProHealth_returnsImage() throws Exception {
+		Image image = new Image(null, "icons/Pro-health.png");
+		when(pro.getHealth()).thenReturn(image);
 
 		assertEquals(image, levels.getProHealth());
+	}
+
+	@Test
+	public void getZombieHealh_returnsImage() throws Exception {
+		Image image = new Image(null, "icons/Zombie-health.png");
+		when(zombie.getHealth()).thenReturn(image);
+
+		assertEquals(image, levels.getZombieHealth());
 	}
 }

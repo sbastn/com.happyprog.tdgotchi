@@ -18,28 +18,29 @@ public class TinyMoodManager implements MoodManager {
 	}
 
 	@Override
-	public Image[] getNormalMoodForLevel(int level) {
-		Image image1 = activator.getImageFromKey(String.format("level%d-default1", level));
-		Image image2 = activator.getImageFromKey(String.format("level%d-default2", level));
+	public Image[] getNormalMoodForLevel(Level level) {
+		Image image1 = activator.getImageFromKey(String.format("%s-default1", level));
+		Image image2 = activator.getImageFromKey(String.format("%s-default2", level));
 		return new Image[] { image1, image2 };
 	}
 
 	@Override
-	public Image[] getHappyMoodForLevel(int level) {
-		Image image1 = activator.getImageFromKey(String.format("level%d-happy1", level));
-		Image image2 = activator.getImageFromKey(String.format("level%d-happy2", level));
+	public Image[] getHappyMoodForLevel(Level level) {
+		Image image1 = activator.getImageFromKey(String.format("%s-happy1", level));
+		Image image2 = activator.getImageFromKey(String.format("%s-happy2", level));
 		return new Image[] { image1, image2, image1, image2, image1, image2 };
 	}
 
 	@Override
-	public Image[] getUpsetMoodForLevel(int level) {
-		Image image1 = activator.getImageFromKey(String.format("level%d-upset1", level));
-		Image image2 = activator.getImageFromKey(String.format("level%d-upset2", level));
+	public Image[] getUpsetMoodForLevel(Level level) {
+		Image image1 = activator.getImageFromKey(String.format("%s-upset1", level));
+		Image image2 = activator.getImageFromKey(String.format("%s-upset2", level));
 		return new Image[] { image1, image2, image1, image2, image1, image2 };
 	}
 
 	@Override
-	public Image getHealthForLevel(int level) {
-		return activator.getImageFromKey(String.format("level%d-health", level));
+	public Image getHealthForLevel(Level level) {
+		return activator.getImageFromKey(String.format("%s-health", level));
 	}
+
 }

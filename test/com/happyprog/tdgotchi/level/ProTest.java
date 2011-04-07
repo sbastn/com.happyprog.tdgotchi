@@ -21,27 +21,27 @@ public class ProTest {
 	public void getNormalMood_loadsMoodFromManager() throws Exception {
 		level.getNormalMood();
 
-		verify(moodManager).getNormalMoodForLevel(3);
+		verify(moodManager).getNormalMoodForLevel(MoodManager.Level.Pro);
 	}
 
 	@Test
 	public void getHappyMood_loadsMoodForManager() throws Exception {
 		level.getHappyMood();
 
-		verify(moodManager).getHappyMoodForLevel(3);
+		verify(moodManager).getHappyMoodForLevel(MoodManager.Level.Pro);
 	}
 
 	@Test
 	public void getUpsetMood_loadsMoodForManager() throws Exception {
 		level.getUpsetMood();
 
-		verify(moodManager).getUpsetMoodForLevel(3);
+		verify(moodManager).getUpsetMoodForLevel(MoodManager.Level.Pro);
 	}
 
 	@Test
 	public void getHealth_loadsHealthFromManager() throws Exception {
 		level.getHealth();
 
-		verify(moodManager).getHealthForLevel(3);
+		verify(moodManager).getHealthForLevel(MoodManager.Level.Pro);
 	}
 }

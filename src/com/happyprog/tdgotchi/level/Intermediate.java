@@ -18,22 +18,22 @@ public class Intermediate implements Level {
 
 	@Override
 	public Image[] getNormalMood() {
-		return moodManager.getNormalMoodForLevel(2);
+		return moodManager.getNormalMoodForLevel(MoodManager.Level.Intermediate);
 	}
 
 	@Override
 	public Image[] getHappyMood() {
-		return moodManager.getHappyMoodForLevel(2);
+		return moodManager.getHappyMoodForLevel(MoodManager.Level.Intermediate);
 	}
 
 	@Override
 	public Image[] getUpsetMood() {
-		return moodManager.getUpsetMoodForLevel(2);
+		return moodManager.getUpsetMoodForLevel(MoodManager.Level.Intermediate);
 	}
 
 	@Override
 	public Image getHealth() {
-		return moodManager.getHealthForLevel(2);
+		return moodManager.getHealthForLevel(MoodManager.Level.Intermediate);
 	}
 
 }

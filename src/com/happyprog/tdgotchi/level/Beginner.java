@@ -18,22 +18,22 @@ public class Beginner implements Level {
 
 	@Override
 	public Image[] getNormalMood() {
-		return moodManager.getNormalMoodForLevel(1);
+		return moodManager.getNormalMoodForLevel(MoodManager.Level.Beginner);
 	}
 
 	@Override
 	public Image[] getHappyMood() {
-		return moodManager.getHappyMoodForLevel(1);
+		return moodManager.getHappyMoodForLevel(MoodManager.Level.Beginner);
 	}
 
 	@Override
 	public Image[] getUpsetMood() {
-		return moodManager.getUpsetMoodForLevel(1);
+		return moodManager.getUpsetMoodForLevel(MoodManager.Level.Beginner);
 	}
 
 	@Override
 	public Image getHealth() {
-		return moodManager.getHealthForLevel(1);
+		return moodManager.getHealthForLevel(MoodManager.Level.Beginner);
 	}
 
 }

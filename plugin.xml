@@ -10,7 +10,7 @@
       </category>
       <view
             name="TdGotchi"
-            icon="icons/level1-happy1.png"
+            icon="icons/Beginner-happy1.png"
             category="com.happyprog.tdgotchi"
             class="com.happyprog.tdgotchi.views.MainView"
             id="com.happyprog.tdgotchi.views.MainView">

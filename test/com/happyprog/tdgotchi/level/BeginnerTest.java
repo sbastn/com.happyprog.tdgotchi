@@ -22,27 +22,27 @@ public class BeginnerTest {
 	public void getNormalMood_loadsMoodFromManager() throws Exception {
 		level.getNormalMood();
 
-		verify(moodManager).getNormalMoodForLevel(1);
+		verify(moodManager).getNormalMoodForLevel(MoodManager.Level.Beginner);
 	}
 
 	@Test
 	public void getHappyMood_loadsMoodForManager() throws Exception {
 		level.getHappyMood();
 
-		verify(moodManager).getHappyMoodForLevel(1);
+		verify(moodManager).getHappyMoodForLevel(MoodManager.Level.Beginner);
 	}
 
 	@Test
 	public void getUpsetMood_loadsMoodForManager() throws Exception {
 		level.getUpsetMood();
 
-		verify(moodManager).getUpsetMoodForLevel(1);
+		verify(moodManager).getUpsetMoodForLevel(MoodManager.Level.Beginner);
 	}
 
 	@Test
 	public void getHealth_loadsHealthFromManager() throws Exception {
 		level.getHealth();
 
-		verify(moodManager).getHealthForLevel(1);
+		verify(moodManager).getHealthForLevel(MoodManager.Level.Beginner);
 	}
 }

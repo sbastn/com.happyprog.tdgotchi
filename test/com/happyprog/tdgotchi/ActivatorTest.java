@@ -14,9 +14,9 @@ public class ActivatorTest {
 
 		activator.initializeImageRegistry(registry);
 
-		assertNotNull(registry.get("level0-default1"));
-		assertNotNull(registry.get("level1-default1"));
-		assertNotNull(registry.get("level2-default1"));
-		assertNotNull(registry.get("level3-default1"));
+		assertNotNull(registry.get("Beginner-default1"));
+		assertNotNull(registry.get("Intermediate-default1"));
+		assertNotNull(registry.get("Pro-default1"));
+		assertNotNull(registry.get("Zombie-default1"));
 	}
 }

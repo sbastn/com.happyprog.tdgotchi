@@ -11,14 +11,14 @@ import com.happyprog.tdgotchi.scoreboard.TamagotchiObserver;
 
 public class TinyTamagotchiTest {
 
-	private static final Image DEFAULT1 = new Image(null, "icons/level1-default1.png");
-	private static final Image DEFAULT2 = new Image(null, "icons/level1-default2.png");
+	private static final Image DEFAULT1 = new Image(null, "icons/Beginner-default1.png");
+	private static final Image DEFAULT2 = new Image(null, "icons/Beginner-default2.png");
 
-	private static final Image HAPPY1 = new Image(null, "icons/level1-happy1.png");
-	private static final Image HAPPY2 = new Image(null, "icons/level1-happy2.png");
+	private static final Image HAPPY1 = new Image(null, "icons/Beginner-happy1.png");
+	private static final Image HAPPY2 = new Image(null, "icons/Beginner-happy2.png");
 
-	private static final Image UPSET1 = new Image(null, "icons/level1-upset1.png");
-	private static final Image UPSET2 = new Image(null, "icons/level1-upset2.png");
+	private static final Image UPSET1 = new Image(null, "icons/Beginner-upset1.png");
+	private static final Image UPSET2 = new Image(null, "icons/Beginner-upset2.png");
 
 	private static final Image[] DEFAULT_MOOD = new Image[] { DEFAULT1, DEFAULT2 };
 	private static final Image[] HAPPY_MOOD = new Image[] { HAPPY1, HAPPY2 };

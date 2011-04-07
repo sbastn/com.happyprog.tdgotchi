@@ -21,27 +21,27 @@ public class ZombieTest {
 	public void getNormalMood_loadsMoodFromManager() throws Exception {
 		level.getNormalMood();
 
-		verify(moodManager).getNormalMoodForLevel(0);
+		verify(moodManager).getNormalMoodForLevel(MoodManager.Level.Zombie);
 	}
 
 	@Test
 	public void getHappyMood_loadsMoodForManager() throws Exception {
 		level.getHappyMood();
 
-		verify(moodManager).getHappyMoodForLevel(0);
+		verify(moodManager).getHappyMoodForLevel(MoodManager.Level.Zombie);
 	}
 
 	@Test
 	public void getUpsetMood_loadsMoodForManager() throws Exception {
 		level.getUpsetMood();
 
-		verify(moodManager).getUpsetMoodForLevel(0);
+		verify(moodManager).getUpsetMoodForLevel(MoodManager.Level.Zombie);
 	}
 
 	@Test
 	public void getHealth_loadsHealthFromManager() throws Exception {
 		level.getHealth();
 
-		verify(moodManager).getHealthForLevel(0);
+		verify(moodManager).getHealthForLevel(MoodManager.Level.Zombie);
 	}
 }

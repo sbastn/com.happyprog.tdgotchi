@@ -18,22 +18,22 @@ public class Pro implements Level {
 
 	@Override
 	public Image[] getNormalMood() {
-		return moodManager.getNormalMoodForLevel(3);
+		return moodManager.getNormalMoodForLevel(MoodManager.Level.Pro);
 	}
 
 	@Override
 	public Image[] getHappyMood() {
-		return moodManager.getHappyMoodForLevel(3);
+		return moodManager.getHappyMoodForLevel(MoodManager.Level.Pro);
 	}
 
 	@Override
 	public Image[] getUpsetMood() {
-		return moodManager.getUpsetMoodForLevel(3);
+		return moodManager.getUpsetMoodForLevel(MoodManager.Level.Pro);
 	}
 
 	@Override
 	public Image getHealth() {
-		return moodManager.getHealthForLevel(3);
+		return moodManager.getHealthForLevel(MoodManager.Level.Pro);
 	}
 
 }

@@ -4,12 +4,15 @@ import org.eclipse.swt.graphics.Image;
 
 public interface MoodManager {
 
-	Image[] getNormalMoodForLevel(int level);
+	enum Level {
+		Zombie, Beginner, Intermediate, Pro
+	}
 
-	Image[] getHappyMoodForLevel(int level);
+	Image[] getNormalMoodForLevel(Level level);
 
-	Image[] getUpsetMoodForLevel(int level);
+	Image[] getHappyMoodForLevel(Level level);
 
-	Image getHealthForLevel(int level);
+	Image[] getUpsetMoodForLevel(Level level);
 
+	Image getHealthForLevel(Level level);
 }

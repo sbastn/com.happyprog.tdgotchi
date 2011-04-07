@@ -22,57 +22,57 @@ public class TinyMoodManagerTest {
 	}
 
 	@Test
-	public void getNormalMoodForLevelOne_returnsTwoNormalMoodImages() throws Exception {
-		manager.getNormalMoodForLevel(1);
+	public void getNormalMoodForBeginner_returnsBeginnerImages() throws Exception {
+		manager.getNormalMoodForLevel(MoodManager.Level.Beginner);
 
-		assertEquals("*level1-default1**level1-default2*", activator.key.toString());
+		assertEquals("*Beginner-default1**Beginner-default2*", activator.key.toString());
 	}
 
 	@Test
-	public void getNormalMoodForLevelTwo_returnsTwoNormalMoodImages() throws Exception {
-		Image[] images = manager.getNormalMoodForLevel(2);
+	public void getNormalMoodForIntermediate_returnsIntermediateImages() throws Exception {
+		Image[] images = manager.getNormalMoodForLevel(MoodManager.Level.Intermediate);
 
-		assertEquals("*level2-default1**level2-default2*", activator.key.toString());
+		assertEquals("*Intermediate-default1**Intermediate-default2*", activator.key.toString());
 		assertEquals(2, images.length);
 	}
 
 	@Test
-	public void getHappyMoodForLevelOne_returnsSixHappyMoodImages() throws Exception {
-		Image[] images = manager.getHappyMoodForLevel(1);
+	public void getHappyMoodForBeginner_returnsSixHappyMoodImages() throws Exception {
+		Image[] images = manager.getHappyMoodForLevel(MoodManager.Level.Beginner);
 
-		assertEquals("*level1-happy1**level1-happy2*", activator.key.toString());
+		assertEquals("*Beginner-happy1**Beginner-happy2*", activator.key.toString());
 		assertEquals(6, images.length);
 	}
 
 	@Test
-	public void getHappyMoodForLevelTwo_returnsSixHappyMoodImages() throws Exception {
-		Image[] images = manager.getHappyMoodForLevel(2);
+	public void getHappyMoodForIntermediate_returnsSixHappyMoodImages() throws Exception {
+		Image[] images = manager.getHappyMoodForLevel(MoodManager.Level.Intermediate);
 
-		assertEquals("*level2-happy1**level2-happy2*", activator.key.toString());
+		assertEquals("*Intermediate-happy1**Intermediate-happy2*", activator.key.toString());
 		assertEquals(6, images.length);
 	}
 
 	@Test
-	public void getUpsetMoodForLevelOne_returnsSixUpsetMoodImages() throws Exception {
-		Image[] images = manager.getUpsetMoodForLevel(1);
+	public void getUpsetMoodForBeginner_returnsSixUpsetMoodImages() throws Exception {
+		Image[] images = manager.getUpsetMoodForLevel(MoodManager.Level.Beginner);
 
-		assertEquals("*level1-upset1**level1-upset2*", activator.key.toString());
+		assertEquals("*Beginner-upset1**Beginner-upset2*", activator.key.toString());
 		assertEquals(6, images.length);
 	}
 
 	@Test
-	public void getHealthForLevelOne_returnsOneHealthImage() throws Exception {
-		Image image = manager.getHealthForLevel(1);
+	public void getHealthForBeginner_returnsOneHealthImage() throws Exception {
+		Image image = manager.getHealthForLevel(MoodManager.Level.Beginner);
 
-		assertEquals("*level1-health*", activator.key.toString());
+		assertEquals("*Beginner-health*", activator.key.toString());
 		assertNotNull(image);
 	}
 
 	@Test
-	public void getHealthForLevelTwo_returnsOneHealthImage() throws Exception {
-		Image image = manager.getHealthForLevel(2);
+	public void getHealthForIntermediate_returnsOneHealthImage() throws Exception {
+		Image image = manager.getHealthForLevel(MoodManager.Level.Intermediate);
 
-		assertEquals("*level2-health*", activator.key.toString());
+		assertEquals("*Intermediate-health*", activator.key.toString());
 		assertNotNull(image);
 	}
 

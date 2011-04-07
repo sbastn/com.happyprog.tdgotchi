@@ -131,7 +131,7 @@ public class ScoreboardTest {
 
 	@Test
 	public void whenScoreChanges_viewIsUpdated() throws Exception {
-		Image image = new Image(null, "icons/level0-health.png");
+		Image image = new Image(null, "icons/Zombie-health.png");
 		when(levels.getZombieHealth()).thenReturn(image);
 
 		scoreboard.onFailingTest();

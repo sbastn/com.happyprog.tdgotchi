@@ -18,22 +18,22 @@ public class Zombie implements Level {
 
 	@Override
 	public Image[] getNormalMood() {
-		return moodManager.getNormalMoodForLevel(0);
+		return moodManager.getNormalMoodForLevel(MoodManager.Level.Zombie);
 	}
 
 	@Override
 	public Image[] getHappyMood() {
-		return moodManager.getHappyMoodForLevel(0);
+		return moodManager.getHappyMoodForLevel(MoodManager.Level.Zombie);
 	}
 
 	@Override
 	public Image[] getUpsetMood() {
-		return moodManager.getUpsetMoodForLevel(0);
+		return moodManager.getUpsetMoodForLevel(MoodManager.Level.Zombie);
 	}
 
 	@Override
 	public Image getHealth() {
-		return moodManager.getHealthForLevel(0);
+		return moodManager.getHealthForLevel(MoodManager.Level.Zombie);
 	}
 
 }
