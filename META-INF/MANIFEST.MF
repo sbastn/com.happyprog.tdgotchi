@@ -8,6 +8,8 @@ Bundle-Vendor: HAPPYPROG
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit,
- org.eclipse.jdt.junit.core;bundle-version="3.6.1"
+ org.eclipse.jdt.junit.core,
+ org.eclipse.ltk.core.refactoring,
+ org.eclipse.core.resources;bundle-version="3.6.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

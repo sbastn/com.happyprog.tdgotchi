@@ -4,36 +4,42 @@ import org.eclipse.swt.graphics.Image;
 
 import com.happyprog.tdgotchi.level.TinyLevelManager;
 import com.happyprog.tdgotchi.subscriber.JUnitTestSubscriber;
+import com.happyprog.tdgotchi.subscriber.RefactoringSubscriber;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
+import com.happyprog.tdgotchi.subscriber.TinyRefactoringSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 import com.happyprog.tdgotchi.views.TinyTamagotchi;
 import com.happyprog.tdgotchi.views.View;
 
-public class Scoreboard implements TestObserver, TamagotchiObserver {
+public class Scoreboard implements TestObserver, RefactoringObserver, TamagotchiObserver {
 
 	private final View view;
-	private final TestSubscriber subscriber;
+	private final TestSubscriber testSubscriber;
+	private final RefactoringSubscriber refactoringSubscriber;
 	private final Tamagotchi tamagotchi;
+	private final LevelManager levels;
 
 	private TestRun previousTestRun;
 	private int score;
-	private final LevelManager levels;
 
 	private enum TestRun {
 		PASS, FAIL
 	}
 
 	public Scoreboard(View view) {
-		this(view, new TinyTamagotchi(), new JUnitTestSubscriber(), new TinyLevelManager());
+		this(view, new TinyTamagotchi(), new JUnitTestSubscriber(), new TinyRefactoringSubscriber(), new TinyLevelManager());
 	}
 
-	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber subscriber, LevelManager levels) {
+	public Scoreboard(View view, Tamagotchi tamagotchi, TestSubscriber testSubscriber,
+			RefactoringSubscriber refactoringSubscriber, LevelManager levels) {
 		this.view = view;
 		this.tamagotchi = tamagotchi;
-		this.subscriber = subscriber;
+		this.testSubscriber = testSubscriber;
+		this.refactoringSubscriber = refactoringSubscriber;
 		this.levels = levels;
 
 		subscribeToJUnitEvents();
+		subscribeToRefactoringEvents();
 		startTamagotchi(tamagotchi);
 	}
 
@@ -53,6 +59,12 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 			updateScoreWith(-5);
 		}
 		previousTestRun = TestRun.FAIL;
+	}
+
+	@Override
+	public void onRefactoring() {
+		tamagotchi.beHappy();
+		updateScoreWith(1);
 	}
 
 	@Override
@@ -97,7 +109,11 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 	}
 
 	private void subscribeToJUnitEvents() {
-		subscriber.subscribe(this);
+		testSubscriber.subscribe(this);
+	}
+
+	private void subscribeToRefactoringEvents() {
+		refactoringSubscriber.subscribe(this);
 	}
 
 	public void onImageSetCallback() {
@@ -107,4 +123,5 @@ public class Scoreboard implements TestObserver, TamagotchiObserver {
 	public Image getDefaultHealth() {
 		return levels.getBeginnerHealth();
 	}
+
 }

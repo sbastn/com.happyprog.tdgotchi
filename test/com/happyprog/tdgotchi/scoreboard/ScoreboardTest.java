@@ -11,13 +11,15 @@ import com.happyprog.tdgotchi.level.Beginner;
 import com.happyprog.tdgotchi.level.Intermediate;
 import com.happyprog.tdgotchi.level.Pro;
 import com.happyprog.tdgotchi.level.Zombie;
+import com.happyprog.tdgotchi.subscriber.RefactoringSubscriber;
 import com.happyprog.tdgotchi.subscriber.TestSubscriber;
 import com.happyprog.tdgotchi.views.Tamagotchi;
 import com.happyprog.tdgotchi.views.View;
 
 public class ScoreboardTest {
 
-	private TestSubscriber subscriber;
+	private TestSubscriber testSubscriber;
+	private RefactoringSubscriber refactoringSubscriber;
 	private Tamagotchi tamagotchi;
 	private View view;
 
@@ -28,7 +30,8 @@ public class ScoreboardTest {
 	public void before() {
 		view = mock(View.class);
 		tamagotchi = mock(Tamagotchi.class);
-		subscriber = mock(TestSubscriber.class);
+		testSubscriber = mock(TestSubscriber.class);
+		refactoringSubscriber = mock(RefactoringSubscriber.class);
 		levels = mock(LevelManager.class);
 
 		when(levels.getZombie()).thenReturn(new Zombie());
@@ -36,12 +39,17 @@ public class ScoreboardTest {
 		when(levels.getIntermediate()).thenReturn(new Intermediate());
 		when(levels.getPro()).thenReturn(new Pro());
 
-		scoreboard = new Scoreboard(view, tamagotchi, subscriber, levels);
+		scoreboard = new Scoreboard(view, tamagotchi, testSubscriber, refactoringSubscriber, levels);
 	}
 
 	@Test
 	public void subscribesToTestEvents() throws Exception {
-		verify(subscriber).subscribe(scoreboard);
+		verify(testSubscriber).subscribe(scoreboard);
+	}
+
+	@Test
+	public void subscribesToRefactoringEvents() throws Exception {
+		verify(refactoringSubscriber).subscribe(scoreboard);
 	}
 
 	@Test
@@ -81,6 +89,21 @@ public class ScoreboardTest {
 
 		verify(tamagotchi, never()).beHappy();
 		verify(tamagotchi, never()).beUpset();
+	}
+
+	@Test
+	public void onRefactoring_tamagotchiIsHappy() throws Exception {
+		scoreboard.onRefactoring();
+
+		verify(tamagotchi).beHappy();
+	}
+
+	@Test
+	public void onRefactoring_tamagotchiScoresOnePoint() throws Exception {
+		scoreboard.onRefactoring();
+
+		// times 2, since the level is set to beginner when the game starts
+		verify(tamagotchi, times(2)).setLevel(isA(Beginner.class));
 	}
 
 	@Test
