@@ -9,8 +9,8 @@
             id="com.happyprog.tdgotchi">
       </category>
       <view
-            name="TdGotchi"
-            icon="icons/Beginner-happy1.png"
+            name="TDGotchi"
+            icon="icons/Sleeping.png"
             category="com.happyprog.tdgotchi"
             class="com.happyprog.tdgotchi.views.MainView"
             id="com.happyprog.tdgotchi.views.MainView">
